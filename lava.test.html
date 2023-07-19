@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- favicon image -->
+        <link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
+
+		<!-- style.css file -->
+        <link rel="stylesheet" type="text/css"  media="screen" href="style.css"/>
+
+		<!-- select box with search -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
+		<script>
+			$(document).ready(function () {
+				$('select').selectize({
+					sortField: 'text'
+				});
+			});
+		</script>
+
+		<!-- page counter script api -->
+        <script async src="https://api.countapi.xyz/hit/cardboardinspace/952b5c1c-1860-4b70-8f75-6ae7dd7d4a8a?callback=websiteVisits"></script>
+
+		<!-- jquery code for loading "on submit" code 
+		<script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<meta http-equiv='cache-control' content='no-cache'>
+		<meta http-equiv='expires' content='0'>
+		<meta http-equiv='pragma' content='no-cache'>
+
+		
+		<title>Cards test</title>	
+	</head>
+
+	<body id="body">
+		<!-- sticky navigation bar -->
+		<span class="boxShadow">
+		<header class="nav">
+			<div class="heading">
+				<h2>Cardboard in Space</h2>
+				<h2>Cardboard in Space</h2>
+			</div>
+			<nav>
+
+				<ul>
+					<li><a data-page="home" href="{% url 'test">Home</a></li>
+					<li><a data-page="about" href="{% url 'about">About</a></li>
+					<li><a data-page="contact" href="{% url 'contact">Contact</a></li>
+					<li><a id="hide">Background</a></li>
+				</ul>
+			</nav>
+				<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+				<path fill="#0099ff" fill-opacity="1" d="M0,96L0,288L720,288L720,192L1440,192L1440,320L720,320L720,320L0,320L0,320Z"></path>
+			  	</svg>
+				<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319">
+				<path fill="#ff0000" fill-opacity="1" d="M0,350L250,350L300,300L800,300"></path>
+				</svg> -->
+		</header>
+		</span>
+
+			<!-- Hide/unhide background-->
+		<script>
+			// page counter script api 
+			function websiteVisits(response) {
+                document.querySelector("#visits").textContent = response.value;
+            }
+
+			document.addEventListener('DOMContentLoaded', function() {
+	
+				// name search example :  https://api.scryfall.com/cards/named?exact=doom+blade
+	
+				document.getElementById('hide').onclick = () => {
+						// hide/unhide canvas
+						let x = document.getElementById("bg");
+						let y = document.getElementById("body");
+						if (x.style.display == "none") {
+							x.style.display = "block";
+							y.style.backgroundImage = 'url("stars.jpg")';
+
+							audioSun.muted = false;
+							audioFire.muted = false;
+						}
+						else {
+							x.style.display = "none";
+							y.style.backgroundImage = "none";
+
+							audioSun.muted = true;
+							audioFire.muted = true;
+			
+						}
+					}
+				});
+		</script>
+
+		<!-- force reload on "back button" to ensure object.model data reload -->
+		<script type="module">
+
+            window.addEventListener( "pageshow", function ( event ) {
+			    if (performance.navigation.type == 2){
+				    location.reload(true);
+					document.getElementById('form').reset();
+			    }
+            });
+
+		</script>
+
+		<script>
+			// image 3D effect on hover scripting
+			
+			// function to add hover effects after all img's added
+			//document.addEventListener('scroll', function() {
+			//var hover = function () {	
+			function hover() {
+				document.querySelectorAll('img').forEach(item => {
+					item.addEventListener('mousemove', handleHover, false)
+				})
+	
+				document.querySelectorAll('img').forEach(item => {
+					item.addEventListener('mouseleave', resetStyles, false)
+				})
+
+			}
+
+				// hover angle threshold
+				const THRESHOLD = 6;
+	
+	
+				function handleHover(e) {
+					const { clientX, clientY, currentTarget } = e;
+					const { clientWidth, clientHeight, offsetLeft, offsetTop } = currentTarget;
+	
+					const horizontal = (clientX - offsetLeft) / clientWidth;
+					// added -window.scrollY to fix distortin on scroll
+					const vertical = (clientY - (offsetTop - window.scrollY)) / clientHeight;
+	
+					// this can be positive or negative to reverse the dynamic 3d (hover) effect
+					const rotateX = -(THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
+					const rotateY = -(vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
+	
+					this.style.transform =
+					`perspective(${clientWidth}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg) scale3d(1.18, 1.18, 1.18)`;
+				}
+	
+				function resetStyles(e) {
+					this.style.zIndex = "10";
+					this.style.transform =
+					`perspective(${e.currentTarget.clientWidth}px) rotateX(0deg) rotateY(0deg)`;
+				}
+			
+	
+		</script>
+
+		<canvas id="bg"></canvas>
+
+		<main>
+		<p></p>
+
+		<!-- added style margin top to prevent overflow on hover of top row -->
+		<div id="result"></div>
+
+	<!-- base three.js files 
+	<script type="module" src="./three/three.module.js"></script>
+
+	<script type="module" src="./three/EffectComposer.js"></script>
+	<script type="module" src="./three/RenderPass.js"></script>
+	<script type="module" src="./three/FilmPass.js"></script>
+	<script type="module" src="./three/BloomPass.js"></script>  -->
+
+	<!-- shader scripts  ***********************************************************************************  
+	<div id="shaders1">
+	</div>
+	<script>
+		(function loadXMLDoc() {
+		  var xhttp = new XMLHttpRequest();
+		  xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+			  document.getElementById("shaders1").innerHTML =
+			  this.responseText;
+			}
+		  };
+		  xhttp.open("GET", "shaders/vertex.glsl", true);
+		  xhttp.send();
+		  xhttp.open("GET", "shaders/fragment.glsl", true);
+		  xhttp.send();
+		}());
+	</script>
+	-->
+	<script id="vertexShader" type="x-shader/x-vertex">
+
+        uniform vec2 uvScale;
+        varying vec2 vUv;
+
+        void main()
+        {
+
+            vUv = uvScale * uv;
+            vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+            gl_Position = projectionMatrix * mvPosition;
+
+        }
+
+    </script>
+
+	<script id="fragmentShader" type="x-shader/x-fragment">
+
+        uniform float time;
+
+        uniform float fogDensity;
+        uniform vec3 fogColor;
+
+        uniform sampler2D texture1;
+        uniform sampler2D texture2;
+
+        varying vec2 vUv;
+
+        void main( void ) {
+
+            vec2 position = - 1.0 + 2.0 * vUv;
+
+            vec4 noise = texture2D( texture1, vUv );
+            vec2 T1 = vUv + vec2( 1.5, - 1.5 ) * time * 0.02;
+            vec2 T2 = vUv + vec2( - 0.5, 2.0 ) * time * 0.01;
+
+            T1.x += noise.x * 2.0;
+            T1.y += noise.y * 2.0;
+            T2.x -= noise.y * 0.2;
+            T2.y += noise.z * 0.2;
+
+            float p = texture2D( texture1, T1 * 2.0 ).a;
+
+            vec4 color = texture2D( texture2, T2 * 2.0 );
+            vec4 temp = color * ( vec4( p, p, p, p ) * 2.0 ) + ( color * color - 0.1 );
+
+            if( temp.r > 1.0 ) { temp.bg += clamp( temp.r - 2.0, 0.0, 100.0 ); }
+            if( temp.g > 1.0 ) { temp.rb += temp.g - 1.0; }
+            if( temp.b > 1.0 ) { temp.rg += temp.b - 1.0; }
+
+            gl_FragColor = temp;
+
+            float depth = gl_FragCoord.z / gl_FragCoord.w;
+            const float LOG2 = 1.442695;
+            float fogFactor = exp2( - fogDensity * fogDensity * depth * depth * LOG2 );
+            fogFactor = 1.0 - clamp( fogFactor, 0.0, 1.0 );
+
+            gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );
+
+        }
+
+    </script> 
+	
+
+	<!-- GLOW *********************************************************** -->
+	<script type="x-shader/x-vertex" id="vertexShaderGlow">
+		vec4 mod289(vec4 x) {
+			return x - floor(x * (1.0 / 289.0)) * 289.0; }
+		
+			float mod289(float x) {
+			return x - floor(x * (1.0 / 289.0)) * 289.0; }
+		
+			vec4 permute(vec4 x) {
+				return mod289(((x*34.0)+10.0)*x);
+			}
+		
+			float permute(float x) {
+				return mod289(((x*34.0)+10.0)*x);
+			}
+		
+			vec4 taylorInvSqrt(vec4 r)
+			{
+			return 1.79284291400159 - 0.85373472095314 * r;
+			}
+		
+			float taylorInvSqrt(float r)
+			{
+			return 1.79284291400159 - 0.85373472095314 * r;
+			}
+		
+			vec4 grad4(float j, vec4 ip)
+			{
+			const vec4 ones = vec4(1.0, 1.0, 1.0, -1.0);
+			vec4 p,s;
+		
+			p.xyz = floor( fract (vec3(j) * ip.xyz) * 7.0) * ip.z - 1.0;
+			p.w = 1.5 - dot(abs(p.xyz), ones.xyz);
+			s = vec4(lessThan(p, vec4(0.0)));
+			p.xyz = p.xyz + (s.xyz*2.0 - 1.0) * s.www; 
+		
+			return p;
+			}
+									
+			// (sqrt(5) - 1)/4 = F4, used once below
+			#define F4 0.309016994374947451
+		
+			float snoise(vec4 v)
+			{
+			const vec4  C = vec4( 0.138196601125011,  // (5 - sqrt(5))/20  G4
+									0.276393202250021,  // 2 * G4
+									0.414589803375032,  // 3 * G4
+								-0.447213595499958); // -1 + 4 * G4
+		
+			// First corner
+			vec4 i  = floor(v + dot(v, vec4(F4)) );
+			vec4 x0 = v -   i + dot(i, C.xxxx);
+		
+			// Other corners
+		
+			// Rank sorting originally contributed by Bill Licea-Kane, AMD (formerly ATI)
+			vec4 i0;
+			vec3 isX = step( x0.yzw, x0.xxx );
+			vec3 isYZ = step( x0.zww, x0.yyz );
+			//  i0.x = dot( isX, vec3( 1.0 ) );
+			i0.x = isX.x + isX.y + isX.z;
+			i0.yzw = 1.0 - isX;
+			//  i0.y += dot( isYZ.xy, vec2( 1.0 ) );
+			i0.y += isYZ.x + isYZ.y;
+			i0.zw += 1.0 - isYZ.xy;
+			i0.z += isYZ.z;
+			i0.w += 1.0 - isYZ.z;
+		
+			// i0 now contains the unique values 0,1,2,3 in each channel
+			vec4 i3 = clamp( i0, 0.0, 1.0 );
+			vec4 i2 = clamp( i0-1.0, 0.0, 1.0 );
+			vec4 i1 = clamp( i0-2.0, 0.0, 1.0 );
+		
+			//  x0 = x0 - 0.0 + 0.0 * C.xxxx
+			//  x1 = x0 - i1  + 1.0 * C.xxxx
+			//  x2 = x0 - i2  + 2.0 * C.xxxx
+			//  x3 = x0 - i3  + 3.0 * C.xxxx
+			//  x4 = x0 - 1.0 + 4.0 * C.xxxx
+			vec4 x1 = x0 - i1 + C.xxxx;
+			vec4 x2 = x0 - i2 + C.yyyy;
+			vec4 x3 = x0 - i3 + C.zzzz;
+			vec4 x4 = x0 + C.wwww;
+		
+			// Permutations
+			i = mod289(i); 
+			float j0 = permute( permute( permute( permute(i.w) + i.z) + i.y) + i.x);
+			vec4 j1 = permute( permute( permute( permute (
+						i.w + vec4(i1.w, i2.w, i3.w, 1.0 ))
+					+ i.z + vec4(i1.z, i2.z, i3.z, 1.0 ))
+					+ i.y + vec4(i1.y, i2.y, i3.y, 1.0 ))
+					+ i.x + vec4(i1.x, i2.x, i3.x, 1.0 ));
+		
+			// Gradients: 7x7x6 points over a cube, mapped onto a 4-cross polytope
+			// 7*7*6 = 294, which is close to the ring size 17*17 = 289.
+			vec4 ip = vec4(1.0/294.0, 1.0/49.0, 1.0/7.0, 0.0) ;
+		
+			vec4 p0 = grad4(j0,   ip);
+			vec4 p1 = grad4(j1.x, ip);
+			vec4 p2 = grad4(j1.y, ip);
+			vec4 p3 = grad4(j1.z, ip);
+			vec4 p4 = grad4(j1.w, ip);
+		
+			// Normalise gradients
+			vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+			p0 *= norm.x;
+			p1 *= norm.y;
+			p2 *= norm.z;
+			p3 *= norm.w;
+			p4 *= taylorInvSqrt(dot(p4,p4));
+		
+			// Mix contributions from the five corners
+			vec3 m0 = max(0.6 - vec3(dot(x0,x0), dot(x1,x1), dot(x2,x2)), 0.0);
+			vec2 m1 = max(0.6 - vec2(dot(x3,x3), dot(x4,x4)            ), 0.0);
+			m0 = m0 * m0;
+			m1 = m1 * m1;
+			return 49.0 * ( dot(m0*m0, vec3( dot( p0, x0 ), dot( p1, x1 ), dot( p2, x2 )))
+						+ dot(m1*m1, vec2( dot( p3, x3 ), dot( p4, x4 ) ) ) ) ;
+		
+			}
+			// ******************************************************************************************************** noise above
+
+		/* uniform float time;
+		varying vec2 vUv;
+		varying vec3 vPosition;
+		uniform vec2 pixels;
+		float PI = 3.141592653589793238; */
+		varying vec2 vUv;
+		uniform float time;
+		varying vec3 vPosition;
+		varying vec3 vNorm;
+	
+	
+		//varying vec2 vUv;
+		void main () {
+			vUv = uv;
+			vPosition = position;
+			vNorm = normal;
+			// warp sphere
+			float uFrequency = 5.0;
+			float uStrength = 3.0;
+			float nStrength = snoise(vec4(position * uFrequency, time * 0.45)) * uStrength;
+			vPosition += normal * nStrength;
+
+			vec4 viewPos = viewMatrix * vec4(vPosition, 1.0);
+	
+			//gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0);
+			gl_Position = projectionMatrix * viewPos;
+		}
+	</script>
+
+	<script type="x-shader/x-fragment" id="fragmentShaderGlow">
+		uniform float time;
+		varying vec2 vUv;
+		varying vec3 vPosition; 
+		varying vec3 vNorm;
+
+		vec3 brightnessToColor(float b) {
+			b *= 0.25;
+			return (vec3(b, b*b, b*b*b*b)/0.25)*0.8;
+		}
+
+		void main() {
+			float radial = 1. - vNorm.z;
+			radial *= radial * radial * radial;
+
+			float brightness = 1.0 + radial*2.0;
+
+			gl_FragColor.rgb = brightnessToColor(brightness)*radial;
+
+			gl_FragColor.a = radial;
+
+			//gl_FragColor = vec4(radial, 0., 0., 1.);
+		}
+	</script>
+
+    <!-- <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script> -->
+
+	<!-- <script type="importmap">
+		{
+			"imports": {
+				"three/addons/": "./three/jsm/"
+			}
+		}
+	</script> -->
+
+	<!-- background three.js dynamic/responsive objects script -->
+	<script type="module">
+		
+        import * as THREE from './three/three.module.js';
+
+        import { EffectComposer } from './three/jsm/postprocessing/EffectComposer.js';
+		import { RenderPass } from './three/jsm/postprocessing/RenderPass.js';
+		import { FilmPass } from './three/jsm/postprocessing/FilmPass.js';
+		import { BloomPass } from './three/jsm/postprocessing/BloomPass.js';
+
+		let camera, scene, renderer, mesh, mesh2, controls;
+
+		let mouseX, mouseY, targetX, targetY, windowX, windowY;
+
+		let geometry, material, uniforms, time, resolution;
+
+		let geometry3, material3, mesh3;
+
+		let planeGeometry, planeMaterial, plane;
+
+		// 3d image mouse
+		const cursor = {
+			x: 0,
+			y: 0,
+			lerpX: 0,
+			lerpY: 0,
+		  }
+
+		// let renderPass, composer, bloomPass;
+
+			init();
+
+
+			function init() {
+
+				// Three.js Scene
+				scene = new THREE.Scene();
+				scene.name = scene;
+
+				// Three.js Camera  (..., ..., near plane frustrum set to 43 per current sphere scroll zoom AND particles overlap, ...)
+				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 43, 1000 );
+				camera.position.set(0, 0, 400);
+
+				// orbit controls 
+				// controls = new THREE.OrbitControls(camera);
+
+				//texture loading
+				const textureLoader = new THREE.TextureLoader();
+
+				// this texture being referenced from the static folder only loads in html (not.js)
+				const depthImage = textureLoader.load("textures/mDepth2.png");
+				//const depthImage = textureLoader.load("textures/FpDepthBlur2.png");
+
+				const originalImage = textureLoader.load("textures/mountain1.png");
+				//const originalImage = textureLoader.load("textures/FrankProfile1.png");
+
+				//  particle texture loading
+				const star = textureLoader.load("star/asteroid2.png");
+				star.rotation = 0.3;
+
+                //lave textures
+                uniforms = {
+                    'fogDensity': { value: 0.45},
+                    'fogColor': { value: new THREE.vector3( 0, 0, 0)},
+                    'time': { value: 1.0},
+                    'uvScale': { value: new THREE.vector2( 3.0, 1.0)},
+                    'texture1': { value: textureLoader.load( './three/cloud.png')},
+                    'texture2': { value: textureLoader.load( './three/lavatile.jpg')},
+                };
+
+                uniforms[ 'texture1' ].value.wrapS = uniforms[ 'texture1' ].value.wrapT = THREE.RepeatWrapping;
+                uniforms[ 'texture2' ].value.wrapS = uniforms[ 'texture2' ].value.wrapT = THREE.RepeatWrapping;
+
+				// Lightning ambient (x, 3'intensity')
+				/*
+				const ambientLight = new THREE.AmbientLight(0x404040, 1);
+				//ambientLight.position.set(1,1,1);
+
+				scene.add(ambientLight);
+
+				// Light directional Top (gold : 0xC95500) (red : 0xaa1000)
+				const Light = new THREE.DirectionalLight(0xaa1000, 8);
+				Light.position.set(90,90,70);
+
+				scene.add(Light);
+
+				// Light directional Bottom  (purple : 0x050055) (blue : 0x001030)
+				const Light2 = new THREE.DirectionalLight(0x001030, 20);
+				Light2.position.set(-90,-90,20);
+
+				scene.add(Light2);
+
+				//const pointLightHelper = new THREE.PointLightHelper(pointLight, 1);
+				//scene.add(pointLightHelper);
+
+				*/
+
+				//const geometry = new THREE.DodecahedronGeometry(180, 2);
+				//const geometry = new THREE.IcosahedronGeometry(180, 2);
+				geometry = new THREE.SphereGeometry(280, 100, 150);
+
+				// sun outer glow geo
+				geometry3 = new THREE.SphereGeometry(315, 100, 8);
+
+				// Material (normal texture)
+				/*const material = new THREE.MeshStandardMaterial();
+				material.metalness = 0.7;
+				material.roughness = 0.2;
+				material.flatShading = true;
+				material.needsUpdate = true;
+				material.normalMap = normalTexture;
+				material.color = new THREE.Color(0x292929);  */
+
+				// Material (Shaders)
+				time = 1.0;
+				material = new THREE.ShaderMaterial( {
+					// THREE.Doubleside causes noticable performance drop **********
+					//side: THREE.DoubleSide, 
+					//side: THREE.BackSide,
+
+					uniforms: uniforms,
+
+					vertexShader: document.getElementById( 'vertexShader' ).textContent,
+					//vertexShader: "shaders/vertex.glsl",
+
+					fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
+					//fragmentShader: "shaders/fragment.glsl",
+				
+				} ); 
+
+				// sun outer glow mat
+				material3 = new THREE.ShaderMaterial( {
+					
+					side: THREE.BackSide,
+
+					uniforms: {
+						time: {
+							value: 1.0
+						}
+					}, 
+				
+					vertexShader: document.getElementById( 'vertexShaderGlow' ).textContent,
+
+					fragmentShader: document.getElementById( 'fragmentShaderGlow' ).textContent,
+				
+				} ); 
+
+				// sun glow mesh
+				mesh3 = new THREE.Mesh(geometry3, material3);
+
+				// Mesh
+				mesh = new THREE.Mesh(geometry, material);
+				scene.add(mesh);
+
+				scene.add(mesh3);
+
+
+				//second object 
+
+				//const geometry2 = new THREE.BoxGeometry(430, 430, 430);
+				//const material2 = new THREE.MeshStandardMaterial({ 
+				//	color: "red",
+				//	wireframe: true,
+				//});
+
+				//mesh2 = new THREE.Mesh(geometry2, material2);
+				//mesh2.position.set(0,0,0);
+				//scene.add(mesh2);
+
+				// 3d card Geo, Mat, Mesh
+				planeGeometry = new THREE.PlaneGeometry(67.2 * 0.45, 93.6 * 0.45);
+				//planeGeometry = new THREE.PlaneBufferGeometry(512 *0.25, 361 *0.25);
+				//planeGeometry = new THREE.CircleBufferGeometry(512 *0.15, 80);
+
+				planeMaterial = new THREE.ShaderMaterial({
+					uniforms: {
+						originalTexture: { value: originalImage },
+						depthTexture: { value: depthImage },
+						uMouse: { value: new THREE.Vector2(0, 0) },
+						//uThreshold: { value: new THREE.Vector2(20. * 0.85, 35. * 0.85) },
+						uThreshold: { value: new THREE.Vector2(20. * 1.2, 35. * 1.2) },
+					},
+					fragmentShader: `
+						precision mediump float;
+						uniform sampler2D originalTexture; 
+						uniform sampler2D depthTexture; 
+						uniform vec2 uMouse;
+						uniform vec2 uThreshold;
+
+						varying vec2 vUv;
+
+						vec2 mirrored(vec2 v) {
+							vec2 m = mod(v,2.);
+							return mix(m,2.0 - m, step(1.0 ,m));
+						}
+
+						void main() {
+							vec4 depthMap = texture2D(depthTexture, mirrored(vUv));
+							vec2 fake3d = vec2(vUv.x + (depthMap.r - 0.5) * uMouse.x / uThreshold.x, vUv.y + (depthMap.r - 0.5) * uMouse.y / uThreshold.y);
+
+							gl_FragColor = texture2D(originalTexture,mirrored(fake3d));
+						}
+					`,
+					vertexShader: `
+						varying vec2 vUv; 
+
+						void main() {
+							vUv = uv; 
+
+							vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+							gl_Position = projectionMatrix * modelViewPosition; 
+						}
+					`,
+				});
+				planeMaterial.transparent = true;
+				planeMaterial.opacity = 0.75;
+
+				plane = new THREE.Mesh(planeGeometry, planeMaterial);
+
+				plane.name = "plane1";
+
+				scene.add(plane);
+
+				plane.position.x = -30;
+				plane.position.y = -7;
+				plane.position.z = 455;
+				plane.rotateZ(0.05);
+
+				// **************************
+
+				// Other small stars object
+				// Particles geometry
+				const dotGeometry = new THREE.BufferGeometry();
+				// particle count
+				const dotsCnt = 5000;
+				//const posArray = new Float32Array(dotCnt * 3);  ***Old attempt***
+
+				const vertices = [];
+
+				for ( let i = 0; i < dotsCnt; i ++) {
+
+					// randFloatSpread is +/- half the input spread (points spread volume)
+					const x = THREE.MathUtils.randFloatSpread( 1000 );
+					const y = THREE.MathUtils.randFloatSpread( 1000 );
+					const z = THREE.MathUtils.randFloatSpread( 1000 );
+
+					vertices.push( x, y, z );
+				}
+			
+				// ***old attempt***
+				//for (let i = 0; i < dotCnt * 3; i++) {
+				//	posArray[i] = (Math.random() - 0.5) * 5,
+				//};
+
+				dotGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+				const dotMaterial = new THREE.PointsMaterial({
+					size: 2.0,
+					//color: 0xddc0ff,
+					color: 0xffffff,
+					map: star,
+					transparent: true,
+				});
+
+				mesh2 = new THREE.Points(dotGeometry, dotMaterial);
+				scene.add(mesh2);
+
+
+				// Renderer
+				renderer = new THREE.WebGLRenderer( { 
+					canvas: document.querySelector('#bg'),
+					alpha: true,
+					antialias: false,
+  					powerPreference: "high-performance",
+				} );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				camera.position.setZ(500);
+				document.body.appendChild( renderer.domElement );
+
+				// post-processing effects setup
+                const renderModel = new RenderPass (scene, camera);
+                const effectBloom = new BloomPass(1.25);
+                const effectFilm = new FilmPass(0.35, 0.95, 2048, false);
+
+				composer = new EffectComposer(renderer);
+
+				composer.addPass(renderModel);
+				composer.addPass(effectBloom);
+				composer.addPass(effectFilm);
+
+
+				
+				window.addEventListener( 'resize', onWindowResize );
+
+
+				// // dynamic mouse orientation Initialized
+				document.addEventListener('mousemove', onDocumentMouseMove);
+				document.addEventListener('mouseout', onDocumentMouseOut);
+				mouseX = 0;
+				mouseY = 0;
+				targetX = 0;
+				targetY = 0;
+				windowX = window.innerWidth / 2;
+				windowY = window.innerHeight / 2;
+			}
+
+			// scroll object ZOOM browser event listener
+			window.addEventListener( 'scroll', throttle(updateSphere, 0), false);
+
+			// throttle function for scroll
+			function throttle(fn, wait) {
+				var time1 = Date.now();
+				return function() {
+				  if ((time1 + wait - Date.now()) < 0) {
+					fn();
+					time1 = Date.now();
+				  }
+				}
+			  } 
+			// throttled scroll listener for img hover
+			//window.addEventListener('scroll', throttle(hover, 2000));
+
+			// nav bar dynamic on scroll
+			const nav = document.querySelector("header.nav");
+			//const footer = document.querySelector("footer.footer");
+			let lastScrollY = window.scrollY;
+
+			// scroll function to zoom Object main
+			var lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+			// scroll function to zoom Object main
+			function updateSphere(event) {
+
+				var st = window.pageYOffset || document.documentElement.scrollTop;
+				// lastScrollTop && mesh.position.z < 140
+				// camera.position.set(0, 0, 400);
+				if (st > lastScrollTop && camera.position.z > 365){
+					camera.position.z += -1.0;
+					//mesh.position.z += 1.5;
+					//mesh3.position.z += 1.5;
+					lastScrollTop = st <= 0 ? 0 : st;
+
+					audioFire.volume += (0.00008);
+					audioSun.volume += (0.0010);
+				}
+				// lastScrollTop && mesh.position.z > 0
+				else if (st < lastScrollTop && camera.position.z < 500) {
+					camera.position.z += 1.0;
+					//mesh.position.z += window.scrollY * -.0007;
+					//mesh.position.z += -1.5;
+					//mesh3.position.z += -1.5;
+					lastScrollTop = st <= 0 ? 0 : st;
+
+					audioFire.volume -= (0.00008);
+					audioSun.volume -= (0.0010);
+				}
+				else {
+					lastScrollTop = st <= 0 ? 0 : st;
+					
+				}
+
+				// nav bar dynamic on scroll
+				if (lastScrollY < window.scrollY) {
+					nav.style.top = "-9.375rem";
+					//footer.style.bottom = "-6.25rem";
+				}
+				else {
+					nav.style.top = "0";
+					//footer.style.bottom = "0";
+				}
+				
+				lastScrollY = window.scrollY;
+
+				// delete 'plane' 3d parallax display card on scroll***********************
+				if (typeof plane !== "undefined" && camera.position.z > 470){
+					scene.remove(plane);
+					plane.geometry.dispose();
+					plane.material.dispose();
+					plane = undefined;
+				}
+
+				return;
+			}
+
+			// 3d image clock
+			const clock = new THREE.Clock();
+
+			// dynamic mouse movement interaction Function					
+			function onDocumentMouseMove(event) {
+
+				mouseX = (event.clientX - windowX);
+				mouseY = (event.clientY - windowY);
+				cursor.x = event.clientX / windowX - 0.5;
+  				cursor.y = event.clientY / windowY - 0.5;
+			}
+
+			// dynamic mouse movement interaction Function					
+			function onDocumentMouseOut(event) {
+				cursor.x = 0;
+  				cursor.y = 0;
+			}
+			
+			// dynamic window resizing
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.setPixelRatio( window.devicePixelRatio );
+
+			}
+
+			// 3d image clock
+			let previousTime = 0;
+
+			// Animation
+			function animate() {
+				
+				// dynamic mouse movement interaction (keep rotation.z for constant movement)
+				targetX = mouseX * .001;
+				targetY = mouseY * .001;
+				// 4 Mesh rotations temporary off for shader tests
+				//mesh.rotation.x += .003 * (targetY - mesh.rotation.x);
+				//mesh.rotation.y += .003 * (targetX - mesh.rotation.y);
+
+				mesh2.rotation.x += .011 * (targetY - mesh2.rotation.x);
+				mesh2.rotation.y += .011 * (targetX - mesh2.rotation.y);
+
+				// 3d image parallaxing 
+				const elapsedTime = clock.getElapsedTime();
+				const deltaTime = elapsedTime - previousTime;
+				previousTime = elapsedTime;
+
+				//const parallaxX = cursor.x * 0.5;
+  				//const parallaxY = - cursor.y * 0.5;
+
+				// Temp set to consistent and NOT mouse move
+				//cursor.lerpX  += (parallaxX - cursor.lerpX ) * 5 * deltaTime;
+				//cursor.lerpY += (parallaxY - cursor.lerpY) * 5 * deltaTime;
+				// * speed , * tolerance 
+				cursor.lerpX  = Math.sin(elapsedTime*0.7) * 0.6;
+				//cursor.lerpY = Math.sin(elapsedTime*0.9) * 0.7;   ***************
+				cursor.lerpY = Math.sin(elapsedTime*1.1) * 0.4;
+
+				// 3d image positioning values
+				planeMaterial.uniforms.uMouse.value = new THREE.Vector2(cursor.lerpX , cursor.lerpY);
+
+				// Mesh (sun) static movement (diable x/y when mouse move on)
+				//mesh.rotation.x += 0.0005;
+				//mesh.rotation.y += 0.0009;
+				//mesh.rotation.z -= 0.0003;
+
+				//mesh3.rotation.z -= 2.0;
+
+				// Mesh 2 (asteroids) static movement best (rotate z)
+				//mesh2.rotation.y += 0.003;
+				//mesh2.rotation.x += 0.0005;
+				mesh2.rotation.z -= 0.0009;
+
+				//shader updates
+				time += 0.05;
+				material.uniforms.time.value = time;
+				material3.uniforms.time.value = time;
+
+                // post-processing render
+                composer.render( 0.01 );
+
+				//renderer.render(scene, camera);
+
+				requestAnimationFrame(animate);
+			}
+
+			animate();
+
+	</script>
+
+	<!--  new javascript object api search   -->
+	<script>
+
+		function opacity() {
+			const waitElement = document.getElementsByClassName("wait");
+			waitElement[0].style.opacity = "0.0";
+		}
+		//audio file script 
+		const audioFire = new Audio("fire3.ogg");
+		audioFire.volume = (0.005);
+		audioFire.autoplay = true;
+		audioFire.muted = true;
+		audioFire.loop = true; 
+
+		const audioSun = new Audio("sun5.ogg");
+		audioSun.volume = (0.1);
+		audioSun.autoplay = true;
+		audioSun.muted = true;
+		audioSun.loop = true;
+
+		document.addEventListener('DOMContentLoaded', function() {
+			// name search example :  https://api.scryfall.com/cards/named?exact=${search_id}        doom-blade
+			document.querySelector('form.form2').onsubmit = () => {
+				// play audio
+				audioFire.muted = false; 
+				audioSun.muted = false
+
+				// ***********  need update 
+				const search_id = document.getElementById('single').value;
+				//search_id = search_id.trim();
+				//search_id = search_id.replace(" ", "-");
+
+				// fetch single card
+				fetch((`https://api.scryfall.com/cards/named?exact=${search_id}`))
+				.then(response => response.json())
+				.then(data => {
+					//var single1 = Object.assign({}, data);
+					single1 = data;
+
+					// set img1 for div used to iterate 
+					let img1 = document.getElementById('result');
+
+					if (typeof single1.image_uris === 'undefined') {
+						//check if all img data missing
+						if (typeof single1.card_faces !== 'undefined') {
+							img1.innerHTML +=
+							 `<img class="tilt" src="${single1.card_faces[0].image_uris.normal}">`;
+							img1.innerHTML +=
+							 `<img class="tilt" src="${single1.card_faces[1].image_uris.normal}">`;
+						}
+						else {
+							img1.innerHTML +=
+							 `<a href="https://nicksazani.tumblr.com/post/141268107445">
+								<img class="notFound" srcset="https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_100.gifv 100w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_250.gifv 250w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_400.gifv 400w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_500.gifv 500w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_540.gifv 540w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_640.gifv 640w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_1280.gifv 994w" sizes="(max-width: 994px) 100vw, 994px" alt="Wizard Magic-ing" loading="lazy">
+							</a>
+							<br><br>Consider consulting Wizards on your Spelling
+							<br><span class="error">*Wizard character / animation  &copy; Nick Sazani 2016
+							<br>Click image for link to Nick Sazani work / info</span>`;
+						}
+					}
+					if (typeof single1.image_uris !== 'undefined') {
+					img1.innerHTML += `<img class="tilt" src="${single1.image_uris.normal}">`;
+					}
+
+					})
+					// call 3d hover effect function after new img's loaded
+					.then(setTimeout(hover, 2 * 1000))
+					.catch(error => {
+						console.log("Error:", error);
+					});
+					
+					// hide form on submit/search
+					var w = document.getElementById("outer");
+					w.style.display = "none";
+					var y = document.getElementById("outer2");
+					y.style.display = "none";
+					var z = document.getElementById("intro");
+					z.style.display = "none";
+
+					// call for img 3d hover AFTER new img's load  ******** 3 seconds current MINIMUM  *************   called again for larger searches 
+					setTimeout(hover, 8 * 1000);
+					
+					setTimeout(hover, 16 * 1000);
+
+					delete single1;
+
+					//delete parallax 3d card ********************************************************************************
+					//deleteFunction();
+
+					// auto scroll for parallax card delete
+					window.scrollTo(0, 1);
+
+					// stop form from submitting (bypass django dataframe search/result)
+					return false;
+				} 
+			});
+
+		// remove loading graphic
+		function loadingRing() {
+			const waitElement = document.getElementsByClassName("wait");
+			waitElement[0].remove();
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+
+			document.querySelector('form.form1').onsubmit = () => {
+					const waitElement = document.getElementsByClassName("wait");
+					waitElement[0].style.opacity = "0.9";
+					// play audio
+					audioFire.muted = false; 
+					audioSun.muted = false;
+					
+				
+					// get submitted selected option 
+					const select = document.getElementById('set');
+					const search_id = select.options[select.selectedIndex].value;
+			
+					// fetch page 1 (0-174 entries)   =request.getparameter("setselect");
+					fetch((`https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3A${search_id}&unique=prints`))
+					.then(response => response.json())
+					.then(data => {
+						//var page1 = Object.assign({}, data);
+						page1 = data;
+						//page1.push(data);
+						//page1 = JSON.stringify(page1);
+
+						// set img1 for div used to iterate 
+						let img1 = document.getElementById('result');
+
+						// loop through each page adding images 
+						for (let i = 0; i < Object.keys( page1.data ).length; i++) {
+							//check if double face card
+							if (typeof page1.data[i].image_uris === 'undefined') {
+								//check if all img data missing
+								if (typeof page1.data[i].card_faces === 'undefined') {
+
+									continue;
+								}
+								else {
+									img1.innerHTML +=
+									 `<img class="tilt" src="${page1.data[i].card_faces[0].image_uris.normal}">`;
+									img1.innerHTML +=
+									 `<img class="tilt" src="${page1.data[i].card_faces[1].image_uris.normal}">`;
+
+									 continue;
+								}
+							}
+							img1.innerHTML += `<img class="tilt" src="${page1.data[i].image_uris.normal}">`;
+							
+						}
+
+						for (let j = 1; j < 10; j++) {
+							delay(j);
+						}
+						
+						function delay(j) {
+							// timeout to comply with scryfall api use rules
+							setTimeout( () => {
+							//`promise${k}` = setTimeout( () => {
+								if (page1.has_more) {
+									k = j + 1;
+									fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=${k}&q=e%3A${search_id}&unique=prints`))
+									.then(response => response.json())
+									.then(data => {
+
+										pagek = data;
+	
+										// loop through each page adding images 
+										// for (let i = 0; i < Object.keys( pagek.data ).length; i++) {    *** old ***
+										for (let i = 0; i < 175; i++) {
+											//check if double face card
+											if (typeof pagek.data[i].image_uris === 'undefined') {
+												//check if all img data missing
+												if (typeof pagek.data[i].card_faces === 'undefined') {
+
+													// attempt to slow last page load for proper order (fail)
+													img1.innerHTML += 
+													`<img class="tilt" hidden="hidden" src="${page1.data[i].image_uris.normal}">`;
+
+													img1.innerHTML +=
+													`<img class="tilt" hidden="hidden" scr="${page1.data[i].card_faces[0].image_uris.normal}">`;
+
+													continue;
+												}
+												else {
+													img1.innerHTML +=
+													`<img class="tilt" src="${pagek.data[i].card_faces[0].image_uris.normal}">`;
+													img1.innerHTML +=
+													`<img class="tilt" src="${pagek.data[i].card_faces[1].image_uris.normal}">`;
+	
+													continue;
+												}
+											}
+											img1.innerHTML += `<img class="tilt" src="${pagek.data[i].image_uris.normal}">`;
+
+										}
+
+										if (pagek.has_more !== true) {
+											page1.has_more = false;
+										}
+									})
+									.catch(error => {
+										console.log("Error:", error);
+									});
+									
+								}
+
+							}, 200);
+
+							
+						}
+
+
+						// fetch page 2 (175-350 entries)
+						/* if (page1.has_more) {
+							fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=2&q=e%3A${search_id}&unique=prints`))
+							.then(response => response.json())
+							.then(data => {
+								page2 = data;
+
+
+								// loop through each page adding images 
+								for (let i = 0; i < Object.keys( page2.data ).length; i++) {
+									//check if double face card
+									if (typeof page2.data[i].image_uris === 'undefined') {
+										//check if all img data missing
+										if (typeof page2.data[i].card_faces === 'undefined') {
+
+											continue;
+										}
+										else {
+											img1.innerHTML +=
+											`<img class="tilt" width="20%" src="${page2.data[i].card_faces[0].image_uris.normal}">`;
+											img1.innerHTML +=
+											`<img class="tilt" width="20%" src="${page2.data[i].card_faces[1].image_uris.normal}">`;
+
+											continue;
+										}
+									}
+									img1.innerHTML += `<img class="tilt" width="20%" src="${page2.data[i].image_uris.normal}">`;
+								}
+							})
+							.catch(error => {
+								console.log("Error:", error);
+							});
+						}  */
+
+
+						// fetch page 3 (350-? entries)
+						/* if (page2.has_more) {
+							fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=3&q=e%3A${search_id}&unique=prints`))
+							.then(response => response.json())
+							.then(data => {
+								page3 = data;
+
+								// loop through each page adding images 
+								for (let i = 0; i < Object.keys( page3.data ).length; i++) {
+									//check if double face card.
+									if (typeof page3.data[i].image_uris === 'undefined') {
+										//check if all img data missing
+										if (typeof page3.data[i].card_faces === 'undefined') {
+
+											continue;
+										}
+										else {
+											img1.innerHTML +=
+											`<img class="tilt" width="20%" src="${page3.data[i].card_faces[0].image_uris.normal}">`;
+											img1.innerHTML +=
+											`<img class="tilt" width="20%" src="${page3.data[i].card_faces[1].image_uris.normal}">`;
+
+											continue;
+										}
+									}
+									img1.innerHTML += `<img class="tilt" width="20%" src="${page3.data[i].image_uris.normal}">`;
+								}
+							})
+							.catch(error => {
+								console.log("Error:", error);
+							}); 
+
+						}  */
+					})
+					// call 3d hover effect function after new img's loaded
+					.then(setTimeout(hover, 4 * 1000))
+					.catch(error => {
+						console.log("Error:", error);
+					});
+					
+					// hide form on submit/search
+					var w = document.getElementById("outer");
+					w.style.display = "none";
+					var y = document.getElementById("outer2");
+					y.style.display = "none";
+					var z = document.getElementById("intro");
+					z.style.display = "none";
+
+
+					// call for img 3d hover AFTER new img's load  ******** 3 seconds current MINIMUM  *************   called again for larger searches 
+					setTimeout(hover, 10 * 1000);
+					
+					setTimeout(hover, 20 * 1000);
+					
+
+					delete page1;
+					delete pagek;
+					
+					// reset form for proper load on refresh
+					//document.getElementById('form').reset();
+
+					// auto scroll for parallax card delete
+					window.scrollTo(0, 1);
+
+					//setTimeout(opacity, 4 * 1000);
+					setTimeout(loadingRing, 6 * 1000);  
+
+					// stop form from submitting (bypass django dataframe search/result)
+					return false;
+				}
+
+
+		});
+
+	</script>
+
+	<div id="intro">
+		<section class="hidden">
+		Select a "Magic: The Gathering" set and 'Submit' to view some cardboard in space
+		<!-- <h2>Select a Magic: The Gathering set of cards -> and go through that digital cardboard in space.</h2>
+		<a href="https://www.technologyreview.com/2019/05/07/135482/magic-the-gathering-is-officially-the-worlds-most-complex-game/">
+		<h3>“Magic: The Gathering is officially the world’s most complex game."</h3>
+		</a>
+		The article by Emerging Technology in which they summarize the paper submitted by 
+		independent researcher Alex Churchill and colleagues on March 24, 2019.
+		<a href="https://arxiv.org/abs/1904.09828#">Original Paper</a>
+		<a href="https://arxiv.org/pdf/1904.09828.pdf">PDF</a>
+
+		<p></p>
+		<h3>One of my favorite aspects of the game is going through a set, reading the cards effects, and enjoying the artwork.</h3>
+		With "Cardboard in Space" I can now do that with clearer images of the cards and my favorite backdrop.
+		
+		<img id="frame" src="textures/mFrame1.png">  -->
+		</section>
+	</div>
+	<!-- script for text fade in-->
+	<script>
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+			console.log(entry)
+			if (entry.isIntersecting) {
+				entry.target.classList.add('show');
+			} else {
+				entry.target.classList.remove('show');
+			}
+			});
+		});
+
+		const hiddenElements = document.querySelectorAll('.hidden');
+		hiddenElements.forEach((el) => observer.observe(el));
+		
+	</script>
+
+	<div class="wait">
+		Just a moment while I grab those cards...
+		<div class="loading2"></div>
+	</div>
+	<div class="outer" id="outer">
+		<!-- <form action="{% url 'result" method="post" id="form">    selected="selected" -->
+			<form id="form" class="form1" method="post" autocomplete="off">
+			{% csrf_token %}
+	
+			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Enter a set name or choose from the list">
+				<optgroup label="Expansions">
+				<option data-svg-code="1" value="1" disabled>**Expansions</option>
+				<option data-svg-code="default" value="one">Phyrexia: All Will Be One (ONE)</option>
+				<option data-svg-code="bro" value="bro">The Brothers War (BRO)</option>
+				<option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
+				<option data-svg-code="snc" value="snc">Streets of New Capenna (SNC)</option>
+				<option data-svg-code="neo" value="neo">Kamigawa: Neon Dynasty (NEO)</option>
+				<option data-svg-code="vow" value="vow">Innistrad: Crimson Vow (VOW)</option>
+				<option data-svg-code="mid" value="mid">Innistrad: Midnight Hunt (MID)</option>
+				<option data-svg-code="afr" value="afr">Adventures in the Forgotten Realms (AFR)</option>
+				<option data-svg-code="stx" value="stx">Strixhaven: School of Mages (STX)</option>
+				<option data-svg-code="khm" value="khm">Kaldheim (KHM)</option>
+				<option data-svg-code="znr" value="znr">Zendikar Rising (ZNR)</option>
+				<option data-svg-code="iko" value="iko">Ikoria: Lair of Behemoths (IKO)</option>
+				<option data-svg-code="thb" value="thb">Theros Beyond Death (THB)</option>
+				<option data-svg-code="eld" value="eld">Throne of Eldraine (ELD)</option>
+				<option data-svg-code="war" value="war">War of the Spark (WAR)</option>
+				<option data-svg-code="rna" value="rna">Ravnica Allegiance (RNA)</option>
+				<option data-svg-code="grn" value="grn">Guilds of Ravnica (GRN)</option>
+				<option data-svg-code="dom" value="dom">Dominaria (DOM)</option>
+				<option data-svg-code="rix" value="rix">Rivals of Ixalan (RIX)</option>
+				<option data-svg-code="xln" value="xln">Ixalan (XLN)</option>
+				<option data-svg-code="hou" value="hou">Hour of Devastation (HOU)</option>
+				<option data-svg-code="akh" value="akh">Amonkhet (AKH)</option>
+				<option data-svg-code="aer" value="aer">Aether Revolt (AER)</option>
+				<option data-svg-code="kld" value="kld">Kaladesh (KLD)</option>
+				<option data-svg-code="emn" value="emn">Eldritch Moon (EMN)</option>
+				<option data-svg-code="soi" value="soi">Shadows over Innistrad (SOI)</option>
+				<option data-svg-code="ogw" value="ogw">Oath of the Gatewatch (OGW)</option>
+				<option data-svg-code="bfz" value="bfz">Battle for Zendikar (BFZ)</option>
+				<option data-svg-code="dtk" value="dtk">Dragons of Tarkir (DTK)</option>
+				<option data-svg-code="frf" value="frf">Fate Reforged (FRF)</option>
+				<option data-svg-code="ktk" value="ktk">Khans of Tarkir (KTK)</option>
+				<option data-svg-code="jou" value="jou">Journey into Nyx (JOU)</option>
+				<option data-svg-code="bng" value="bng">Born of the Gods (BNG)</option>
+				<option data-svg-code="ths" value="ths">Theros (THS)</option>
+				<option data-svg-code="dgm" value="dgm">Dragon&#39;s Maze (DGM)</option>
+				<option data-svg-code="gtc" value="gtc">Gatecrash (GTC)</option>
+				<option data-svg-code="rtr" value="rtr">Return to Ravnica (RTR)</option>
+				<option data-svg-code="avr" value="avr">Avacyn Restored (AVR)</option>
+				<option data-svg-code="dka" value="dka">Dark Ascension (DKA)</option>
+				<option data-svg-code="isd" value="isd">Innistrad (ISD)</option>
+				<option data-svg-code="nph" value="nph">New Phyrexia (NPH)</option>
+				<option data-svg-code="mbs" value="mbs">Mirrodin Besieged (MBS)</option>
+				<option data-svg-code="som" value="som">Scars of Mirrodin (SOM)</option>
+				<option data-svg-code="roe" value="roe">Rise of the Eldrazi (ROE)</option>
+				<option data-svg-code="wwk" value="wwk">Worldwake (WWK)</option>
+				<option data-svg-code="zen" value="zen">Zendikar (ZEN)</option>
+				<option data-svg-code="arb" value="arb">Alara Reborn (ARB)</option>
+				<option data-svg-code="con" value="con">Conflux (CON)</option>
+				<option data-svg-code="ala" value="ala">Shards of Alara (ALA)</option>
+				<option data-svg-code="eve" value="eve">Eventide (EVE)</option>
+				<option data-svg-code="shm" value="shm">Shadowmoor (SHM)</option>
+				<option data-svg-code="mor" value="mor">Morningtide (MOR)</option>
+				<option data-svg-code="lrw" value="lrw">Lorwyn (LRW)</option>
+				<option data-svg-code="fut" value="fut">Future Sight (FUT)</option>
+				<option data-svg-code="plc" value="plc">Planar Chaos (PLC)</option>
+				<option data-svg-code="tsp" value="tsp">Time Spiral (TSP)</option>
+				<option data-svg-code="tsp" value="tsb">Time Spiral Timeshifted (TSB)</option>
+				<option data-svg-code="csp" value="csp">Coldsnap (CSP)</option>
+				<option data-svg-code="dis" value="dis">Dissension (DIS)</option>
+				<option data-svg-code="gpt" value="gpt">Guildpact (GPT)</option>
+				<option data-svg-code="rav" value="rav">Ravnica: City of Guilds (RAV)</option>
+				<option data-svg-code="sok" value="sok">Saviors of Kamigawa (SOK)</option>
+				<option data-svg-code="bok" value="bok">Betrayers of Kamigawa (BOK)</option>
+				<option data-svg-code="chk" value="chk">Champions of Kamigawa (CHK)</option>
+				<option data-svg-code="5dn" value="5dn">Fifth Dawn (5DN)</option>
+				<option data-svg-code="dst" value="dst">Darksteel (DST)</option>
+				<option data-svg-code="mrd" value="mrd">Mirrodin (MRD)</option>
+				<option data-svg-code="scg" value="scg">Scourge (SCG)</option>
+				<option data-svg-code="lgn" value="lgn">Legions (LGN)</option>
+				<option data-svg-code="ons" value="ons">Onslaught (ONS)</option>
+				<option data-svg-code="jud" value="jud">Judgment (JUD)</option>
+				<option data-svg-code="tor" value="tor">Torment (TOR)</option>
+				<option data-svg-code="ody" value="ody">Odyssey (ODY)</option>
+				<option data-svg-code="apc" value="apc">Apocalypse (APC)</option>
+				<option data-svg-code="pls" value="pls">Planeshift (PLS)</option>
+				<option data-svg-code="inv" value="inv">Invasion (INV)</option>
+				<option data-svg-code="pcy" value="pcy">Prophecy (PCY)</option>
+				<option data-svg-code="nem" value="nem">Nemesis (NEM)</option>
+				<option data-svg-code="mmq" value="mmq">Mercadian Masques (MMQ)</option>
+				<option data-svg-code="uds" value="uds">Urza&#39;s Destiny (UDS)</option>
+				<option data-svg-code="ulg" value="ulg">Urza&#39;s Legacy (ULG)</option>
+				<option data-svg-code="usg" value="usg">Urza&#39;s Saga (USG)</option>
+				<option data-svg-code="exo" value="exo">Exodus (EXO)</option>
+				<option data-svg-code="sth" value="sth">Stronghold (STH)</option>
+				<option data-svg-code="tmp" value="tmp">Tempest (TMP)</option>
+				<option data-svg-code="wth" value="wth">Weatherlight (WTH)</option>
+				<option data-svg-code="vis" value="vis">Visions (VIS)</option>
+				<option data-svg-code="mir" value="mir">Mirage (MIR)</option>
+				<option data-svg-code="all" value="all">Alliances (ALL)</option>
+				<option data-svg-code="hml" value="hml">Homelands (HML)</option>
+				<option data-svg-code="ice" value="ice">Ice Age (ICE)</option>
+				<option data-svg-code="fem" value="fem">Fallen Empires (FEM)</option>
+				<option data-svg-code="drk" value="drk">The Dark (DRK)</option>
+				<option data-svg-code="leg" value="leg">Legends (LEG)</option>
+				<option data-svg-code="atq" value="atq">Antiquities (ATQ)</option>
+				<option data-svg-code="arn" value="arn">Arabian Nights (ARN)</option></optgroup>
+				<optgroup label="Core Sets">
+				<option data-svg-code="2" value="2" disabled>*Core Sets</option>
+				<option data-svg-code="m21" value="m21">Core Set 2021 (M21)</option>
+				<option data-svg-code="m20" value="m20">Core Set 2020 (M20)</option>
+				<option data-svg-code="m19" value="m19">Core Set 2019 (M19)</option>
+				<option data-svg-code="ori" value="ori">Magic Origins (ORI)</option>
+				<option data-svg-code="m15" value="m15">Magic 2015 (M15)</option>
+				<option data-svg-code="m14" value="m14">Magic 2014 (M14)</option>
+				<option data-svg-code="m13" value="m13">Magic 2013 (M13)</option>
+				<option data-svg-code="m12" value="m12">Magic 2012 (M12)</option>
+				<option data-svg-code="m11" value="m11">Magic 2011 (M11)</option>
+				<option data-svg-code="m10" value="m10">Magic 2010 (M10)</option>
+				<option data-svg-code="10e" value="10e">Tenth Edition (10E)</option>
+				<option data-svg-code="9ed" value="9ed">Ninth Edition (9ED)</option>
+				<option data-svg-code="8ed" value="8ed">Eighth Edition (8ED)</option>
+				<option data-svg-code="7ed" value="7ed">Seventh Edition (7ED)</option>
+				<option data-svg-code="6ed" value="6ed">Classic Sixth Edition (6ED)</option>
+				<option data-svg-code="5ed" value="5ed">Fifth Edition (5ED)</option>
+				<option data-svg-code="4ed" value="4bb">Fourth Edition Foreign Black Border (4BB)</option>
+				<option data-svg-code="4ed" value="4ed">Fourth Edition (4ED)</option>
+				<option data-svg-code="psum" value="sum">Summer Magic / Edgar (SUM)</option>
+				<option data-svg-code="3ed" value="3ed">Revised Edition (3ED)</option>
+				<option data-svg-code="3ed" value="fbb">Foreign Black Border (FBB)</option>
+				<option data-svg-code="2ed" value="2ed">Unlimited Edition (2ED)</option>
+				<option data-svg-code="leb" value="leb">Limited Edition Beta (LEB)</option>
+				<option data-svg-code="lea" value="lea">Limited Edition Alpha (LEA)</option></optgroup>
+				<optgroup label="Masters">
+				<option data-svg-code="3" value="3" disabled>*Masters</option>
+				<option data-svg-code="dmr" value="dmr">Dominaria Remastered (DMR)</option>
+				<option data-svg-code="uplist" value="uplist">The List (Unfinity Foil Edition) (UPLIST)</option>
+				<option data-svg-code="2x2" value="2x2">Double Masters 2022 (2X2)</option>
+				<option data-svg-code="star" value="slx">Universes Within (SLX)</option>
+				<option data-svg-code="tsr" value="tsr">Time Spiral Remastered (TSR)</option>
+				<option data-svg-code="klr" value="klr">Kaladesh Remastered (KLR)</option>
+				<option data-svg-code="planeswalker" value="plist">The List (PLIST)</option>
+				<option data-svg-code="akr" value="akr">Amonkhet Remastered (AKR)</option>
+				<option data-svg-code="2xm" value="2xm">Double Masters (2XM)</option>
+				<option data-svg-code="planeswalker" value="fmb1">Mystery Booster Retail Edition Foils (FMB1)</option>
+				<option data-svg-code="planeswalker" value="mb1">Mystery Booster (MB1)</option>
+				<option data-svg-code="uma" value="uma">Ultimate Masters (UMA)</option>
+				<option data-svg-code="a25" value="a25">Masters 25 (A25)</option>
+				<option data-svg-code="ima" value="ima">Iconic Masters (IMA)</option>
+				<option data-svg-code="mm3" value="mm3">Modern Masters 2017 (MM3)</option>
+				<option data-svg-code="ema" value="ema">Eternal Masters (EMA)</option>
+				<option data-svg-code="mm2" value="mm2">Modern Masters 2015 (MM2)</option>
+				<option data-svg-code="tpr" value="tpr">Tempest Remastered (TPR)</option>
+				<option data-svg-code="vma" value="vma">Vintage Masters (VMA)</option>
+				<option data-svg-code="mma" value="mma">Modern Masters (MMA)</option>
+				<option data-svg-code="me4" value="me4">Masters Edition IV (ME4)</option>
+				<option data-svg-code="me3" value="me3">Masters Edition III (ME3)</option>
+				<option data-svg-code="me2" value="me2">Masters Edition II (ME2)</option>
+				<option data-svg-code="me1" value="me1">Masters Edition (ME1)</option>
+				<option data-svg-code="ren" value="ren">Renaissance (REN)</option>
+				<option data-svg-code="rin" value="rin">Rinascimento (RIN)</option>
+				<option data-svg-code="chr" value="chr">Chronicles (CHR)</option></optgroup>
+				<optgroup label="Draft Innovation">
+				<option data-svg-code="4" value="4" disabled>*Draft Innovation</option>
+				<option data-svg-code="j22" value="j22">Jumpstart 2022 (J22)</option>
+				<option data-svg-code="clb" value="clb">Commander Legends: Battle for Baldur&#39;s Gate (CLB)</option>
+				<option data-svg-code="star" value="dbl">Innistrad: Double Feature (DBL)</option>
+				<option data-svg-code="j21" value="j21">Jumpstart: Historic Horizons (J21)</option>
+				<option data-svg-code="mh1" value="h1r">Modern Horizons 1 Timeshifts (H1R)</option>
+				<option data-svg-code="mh2" value="mh2">Modern Horizons 2 (MH2)</option>
+				<option data-svg-code="cmr" value="cmr">Commander Legends (CMR)</option>
+				<option data-svg-code="jmp" value="jmp">Jumpstart (JMP)</option>
+				<option data-svg-code="mh1" value="mh1">Modern Horizons (MH1)</option>
+				<option data-svg-code="bbd" value="bbd">Battlebond (BBD)</option>
+				<option data-svg-code="cn2" value="cn2">Conspiracy: Take the Crown (CN2)</option>
+				<option data-svg-code="cns" value="cns">Conspiracy (CNS)</option></optgroup>
+				<optgroup label="Duel Decks">
+				<option data-svg-code="gs1" value="gs1">Global Series Jiang Yanggu &amp; Mu Yanling (GS1)</option>
+				<option data-svg-code="ddu" value="ddu">Duel Decks: Elves vs. Inventors (DDU)</option>
+				<option data-svg-code="ddt" value="ddt">Duel Decks: Merfolk vs. Goblins (DDT)</option>
+				<option data-svg-code="dds" value="dds">Duel Decks: Mind vs. Might (DDS)</option>
+				<option data-svg-code="ddr" value="ddr">Duel Decks: Nissa vs. Ob Nixilis (DDR)</option>
+				<option data-svg-code="ddq" value="ddq">Duel Decks: Blessed vs. Cursed (DDQ)</option>
+				<option data-svg-code="ddp" value="ddp">Duel Decks: Zendikar vs. Eldrazi (DDP)</option>
+				<option data-svg-code="ddo" value="ddo">Duel Decks: Elspeth vs. Kiora (DDO)</option>
+				<option data-svg-code="ddd" value="gvl">Duel Decks Anthology: Garruk vs. Liliana (GVL)</option>
+				<option data-svg-code="ddc" value="dvd">Duel Decks Anthology: Divine vs. Demonic (DVD)</option>
+				<option data-svg-code="dd1" value="evg">Duel Decks Anthology: Elves vs. Goblins (EVG)</option>
+				<option data-svg-code="dd2" value="jvc">Duel Decks Anthology: Jace vs. Chandra (JVC)</option>
+				<option data-svg-code="ddn" value="ddn">Duel Decks: Speed vs. Cunning (DDN)</option>
+				<option data-svg-code="ddm" value="ddm">Duel Decks: Jace vs. Vraska (DDM)</option>
+				<option data-svg-code="ddl" value="ddl">Duel Decks: Heroes vs. Monsters (DDL)</option>
+				<option data-svg-code="ddk" value="ddk">Duel Decks: Sorin vs. Tibalt (DDK)</option>
+				<option data-svg-code="ddj" value="ddj">Duel Decks: Izzet vs. Golgari (DDJ)</option>
+				<option data-svg-code="ddi" value="ddi">Duel Decks: Venser vs. Koth (DDI)</option>
+				<option data-svg-code="ddh" value="ddh">Duel Decks: Ajani vs. Nicol Bolas (DDH)</option>
+				<option data-svg-code="td2" value="td2">Duel Decks: Mirrodin Pure vs. New Phyrexia (TD2)</option>
+				<option data-svg-code="ddg" value="ddg">Duel Decks: Knights vs. Dragons (DDG)</option>
+				<option data-svg-code="ddf" value="ddf">Duel Decks: Elspeth vs. Tezzeret (DDF)</option>
+				<option data-svg-code="dde" value="dde">Duel Decks: Phyrexia vs. the Coalition (DDE)</option>
+				<option data-svg-code="ddd" value="ddd">Duel Decks: Garruk vs. Liliana (DDD)</option>
+				<option data-svg-code="ddc" value="ddc">Duel Decks: Divine vs. Demonic (DDC)</option>
+				<option data-svg-code="dd2" value="dd2">Duel Decks: Jace vs. Chandra (DD2)</option>
+				<option data-svg-code="dd1" value="dd1">Duel Decks: Elves vs. Goblins (DD1)</option></optgroup>
+				<optgroup label="Alchemy">
+				<option data-svg-code="ybro" value="ybro">Alchemy: The Brother's War (YBRO)</option>
+				<option data-svg-code="hbg" value="hbg">Alchemy Horizons: Baldur&#39;s Gate (HBG)</option>
+				<option data-svg-code="y22" value="ysnc">Alchemy: New Capenna (YSNC)</option>
+				<option data-svg-code="y22" value="yneo">Alchemy: Kamigawa (YNEO)</option>
+				<option data-svg-code="y22" value="ymid">Alchemy: Innistrad (YMID)</option></optgroup>
+				<optgroup label="Archenemy">
+				<option data-svg-code="e01" value="oe01">Archenemy: Nicol Bolas Schemes (OE01)</option>
+				<option data-svg-code="e01" value="e01">Archenemy: Nicol Bolas (E01)</option>
+				<option data-svg-code="arc" value="oarc">Archenemy Schemes (OARC)</option>
+				<option data-svg-code="arc" value="arc">Archenemy (ARC)</option>
+				<option data-svg-code="dci" value="parc">Promotional Schemes (PARC)</option></optgroup>
+				<optgroup label="Arsenal">
+				<option data-svg-code="cc2" value="cc2">Commander Collection: Black (CC2)</option>
+				<option data-svg-code="cc1" value="cc1">Commander Collection: Green (CC1)</option>
+				<option data-svg-code="cm1" value="cm1">Commander&#39;s Arsenal (CM1)</option></optgroup>
+				<optgroup label="Box">
+				<option data-svg-code="gn3" value="gn3">Game Night 2022 (GN3)</option>
+				<option data-svg-code="mtga" value="ea1">Explorer Anthology 1 (EA1)</option>
+				<option data-svg-code="ha1" value="ha6">Historic Anthology 6 (HA6)</option>
+				<option data-svg-code="q07" value="q07">Challenger Decks 2022 (Q07)</option>
+				<option data-svg-code="star" value="q06">Pioneer Challenger Decks 2021 (Q06)</option>
+				<option data-svg-code="ha1" value="ha5">Historic Anthology 5 (HA5)</option>
+				<option data-svg-code="ha1" value="ha4">Historic Anthology 4 (HA4)</option>
+				<option data-svg-code="star" value="slu">Secret Lair: Ultimate Edition (SLU)</option>
+				<option data-svg-code="ha1" value="ha3">Historic Anthology 3 (HA3)</option>
+				<option data-svg-code="ha1" value="ha2">Historic Anthology 2 (HA2)</option>
+				<option data-svg-code="star" value="sld">Secret Lair Drop (SLD)</option>
+				<option data-svg-code="ha1" value="ha1">Historic Anthology 1 (HA1)</option>
+				<option data-svg-code="gn2" value="gn2">Game Night 2019 (GN2)</option>
+				<option data-svg-code="rna" value="gk2">RNA Guild Kit (GK2)</option>
+				<option data-svg-code="gnt" value="gnt">Game Night (GNT)</option>
+				<option data-svg-code="m19" value="g18">M19 Gift Pack (G18)</option>
+				<option data-svg-code="grn" value="gk1">GRN Guild Kit (GK1)</option>
+				<option data-svg-code="e02" value="e02">Explorers of Ixalan (E02)</option>
+				<option data-svg-code="star" value="g17">2017 Gift Pack (G17)</option>
+				<option data-svg-code="md1" value="md1">Modern Event Deck 2014 (MD1)</option>
+				<option data-svg-code="psal" value="ps11">Salvat 2011 (PS11)</option>
+				<option data-svg-code="td0" value="td0">Magic Online Theme Decks (TD0)</option>
+				<option data-svg-code="dpa" value="dpa">Duels of the Planeswalkers (DPA)</option>
+				<option data-svg-code="csp" value="cst">Coldsnap Theme Decks (CST)</option>
+				<option data-svg-code="phuk" value="phuk">Hachette UK (PHUK)</option>
+				<option data-svg-code="phuk" value="psal">Salvat 2005 (PSAL)</option>
+				<option data-svg-code="dkm" value="dkm">Deckmasters (DKM)</option>
+				<option data-svg-code="psdg" value="psdg">Sega Dreamcast Cards (PSDG)</option>
+				<option data-svg-code="btd" value="btd">Beatdown Box Set (BTD)</option>
+				<option data-svg-code="brb" value="brb">Battle Royale Box Set (BRB)</option>
+				<option data-svg-code="ath" value="ath">Anthologies (ATH)</option>
+				<option data-svg-code="past" value="past">Astral Cards (PAST)</option>
+				<option data-svg-code="vis" value="mgb">Multiverse Gift Box (MGB)</option>
+				<option data-svg-code="default" value="rqs">Rivals Quick Start Set (RQS)</option></optgroup>
+				<optgroup label="Commander">
+				<option data-svg-code="scd" value="scd">Starter Commander Decks (SCD)</option>
+				<option data-svg-code="brc" value="brc">The Brother's War Commander (BRC)</option>	
+				<option data-svg-code="40k" value="40k">Warhammer 40,000 (40K)</option>
+				<option data-svg-code="dmc" value="dmc">Dominaria United Commander (DMC)</option>
+				<option data-svg-code="ncc" value="ncc">New Capenna Commander (NCC)</option>
+				<option data-svg-code="planeswalker" value="phed">Heads I Win, Tails You Lose (PHED)</option>
+				<option data-svg-code="nec" value="nec">Neon Dynasty Commander (NEC)</option>
+				<option data-svg-code="voc" value="voc">Crimson Vow Commander (VOC)</option>
+				<option data-svg-code="mic" value="mic">Midnight Hunt Commander (MIC)</option>
+				<option data-svg-code="afc" value="afc">Forgotten Realms Commander (AFC)</option>
+				<option data-svg-code="c21" value="c21">Commander 2021 (C21)</option>
+				<option data-svg-code="khc" value="khc">Kaldheim Commander (KHC)</option>
+				<option data-svg-code="znc" value="znc">Zendikar Rising Commander (ZNC)</option>
+				<option data-svg-code="c20" value="c20">Commander 2020 (C20)</option>
+				<option data-svg-code="c19" value="c19">Commander 2019 (C19)</option>
+				<option data-svg-code="c18" value="c18">Commander 2018 (C18)</option>
+				<option data-svg-code="cm2" value="cm2">Commander Anthology Volume II (CM2)</option>
+				<option data-svg-code="c17" value="c17">Commander 2017 (C17)</option>
+				<option data-svg-code="cma" value="cma">Commander Anthology (CMA)</option>
+				<option data-svg-code="c16" value="c16">Commander 2016 (C16)</option>
+				<option data-svg-code="c15" value="c15">Commander 2015 (C15)</option>
+				<option data-svg-code="c14" value="c14">Commander 2014 (C14)</option>
+				<option data-svg-code="c13" value="c13">Commander 2013 (C13)</option>
+				<option data-svg-code="cmd" value="cmd">Commander 2011 (CMD)</option></optgroup>
+				<optgroup label="From The Vault">
+				<option data-svg-code="v17" value="v17">From the Vault: Transform (V17)</option>
+				<option data-svg-code="v16" value="v16">From the Vault: Lore (V16)</option>
+				<option data-svg-code="v15" value="v15">From the Vault: Angels (V15)</option>
+				<option data-svg-code="v14" value="v14">From the Vault: Annihilation (V14)</option>
+				<option data-svg-code="v13" value="v13">From the Vault: Twenty (V13)</option>
+				<option data-svg-code="v12" value="v12">From the Vault: Realms (V12)</option>
+				<option data-svg-code="v11" value="v11">From the Vault: Legends (V11)</option>
+				<option data-svg-code="v10" value="v10">From the Vault: Relics (V10)</option>
+				<option data-svg-code="v09" value="v09">From the Vault: Exiled (V09)</option>
+				<option data-svg-code="drb" value="drb">From the Vault: Dragons (DRB)</option></optgroup>
+				<optgroup label="Funny">
+				<option data-svg-code="unf" value="unf">Unfinity (UNF)</option>
+				<option data-svg-code="vow" value="mvow">Innistrad: Crimson Vow Minigames (MVOW)</option>
+				<option data-svg-code="planeswalker" value="cmb2">Mystery Booster Playtest Cards 2021 (CMB2)</option>
+				<option data-svg-code="star" value="htr20">2020 Heroes of the Realm (HTR20)</option>
+				<option data-svg-code="afr" value="mafr">Adventures in the Forgotten Realms Minigames (MAFR)</option>
+				<option data-svg-code="mh2" value="mmh2">Modern Horizons 2 Minigames (MMH2)</option>
+				<option data-svg-code="stx" value="mstx">Strixhaven: School of Mages Minigames (MSTX)</option>
+				<option data-svg-code="khm" value="mkhm">Kaldheim Minigames (MKHM)</option>
+				<option data-svg-code="znr" value="mznr">Zendikar Rising Minigames (MZNR)</option>
+				<option data-svg-code="star" value="htr19">2019 Heroes of the Realm (HTR19)</option>
+				<option data-svg-code="und" value="und">Unsanctioned (UND)</option>
+				<option data-svg-code="planeswalker" value="cmb1">Mystery Booster Playtest Cards 2019 (CMB1)</option>
+				<option data-svg-code="ptg" value="ptg">Ponies: The Galloping (PTG)</option>
+				<option data-svg-code="star" value="htr18">2018 Heroes of the Realm (HTR18)</option>
+				<option data-svg-code="star" value="htr17">2017 Heroes of the Realm (HTR17)</option>
+				<option data-svg-code="ust" value="ust">Unstable (UST)</option>
+				<option data-svg-code="h17" value="h17">HasCon 2017 (H17)</option>
+				<option data-svg-code="star" value="htr16">2016 Heroes of the Realm (HTR16)</option>
+				<option data-svg-code="star" value="hho">Happy Holidays (HHO)</option>
+				<option data-svg-code="unh" value="unh">Unhinged (UNH)</option>
+				<option data-svg-code="ugl" value="ugl">Unglued (UGL)</option></optgroup>
+				<optgroup label="Masterpiece">
+				<option data-svg-code="brr" value="brr">The Brother's War Retro Artifacts (BRR)</option>
+				<option data-svg-code="bot" value="bot">Transformers (BOT)</option>
+				<option data-svg-code="sta" value="sta">Strixhaven Mystical Archive (STA)</option>
+				<option data-svg-code="zne" value="zne">Zendikar Rising Expeditions (ZNE)</option>
+				<option data-svg-code="uma" value="puma">Ultimate Box Topper (PUMA)</option>
+				<option data-svg-code="med" value="med">Mythic Edition (MED)</option>
+				<option data-svg-code="mp2" value="mp2">Amonkhet Invocations (MP2)</option>
+				<option data-svg-code="mps" value="mps">Kaladesh Inventions (MPS)</option>
+				<option data-svg-code="exp" value="exp">Zendikar Expeditions (EXP)</option></optgroup>
+				<optgroup label="Memorabilia">
+				<option data-svg-code="fj22" value="fj22">Jumpstart 2022 Front Cards (FJ22)</option>
+				<option data-svg-code="30a" value="30a">30th Anniversary Edition (30A)</option>
+				<option data-svg-code="dmu" value="admu">Dominaria United Art Series (ADMU)</option>
+				<option data-svg-code="clb" value="aclb">Battle for Baldur&#39;s Gate Art Series (ACLB)</option>
+				<option data-svg-code="snc" value="asnc">New Capenna Art Series (ASNC)</option>
+				<option data-svg-code="neo" value="aneo">Neon Dynasty Art Series (ANEO)</option>
+				<option data-svg-code="voc" value="ovoc">Crimson Vow Commander Display Commanders (OVOC)</option>
+				<option data-svg-code="vow" value="avow">Crimson Vow Art Series (AVOW)</option>
+				<option data-svg-code="mid" value="amid">Midnight Hunt Art Series (AMID)</option>
+				<option data-svg-code="mic" value="omic">Midnight Hunt Commander Display Commanders (OMIC)</option>
+				<option data-svg-code="afc" value="oafc">Forgotten Realms Commander Display Commanders (OAFC)</option>
+				<option data-svg-code="afr" value="aafr">Adventures in the Forgotten Realms Art Series (AAFR)</option>
+				<option data-svg-code="mh2" value="amh2">Modern Horizons 2 Art Series (AMH2)</option>
+				<option data-svg-code="stx" value="astx">Strixhaven Art Series (ASTX)</option>
+				<option data-svg-code="c21" value="oc21">Commander 2021 Display Commanders (OC21)</option>
+				<option data-svg-code="khm" value="akhm">Kaldheim Art Series (AKHM)</option>
+				<option data-svg-code="znr" value="aznr">Zendikar Rising Art Series (AZNR)</option>
+				<option data-svg-code="jmp" value="fjmp">Jumpstart Front Cards (FJMP)</option>
+				<option data-svg-code="c20" value="oc20">Commander 2020 Oversized (OC20)</option>
+				<option data-svg-code="c19" value="oc19">Commander 2019 Oversized (OC19)</option>
+				<option data-svg-code="mh1" value="amh1">Modern Horizons Art Series (AMH1)</option>
+				<option data-svg-code="c18" value="oc18">Commander 2018 Oversized (OC18)</option>
+				<option data-svg-code="mtga" value="xana">Arena New Player Experience Extras (XANA)</option>
+				<option data-svg-code="c17" value="oc17">Commander 2017 Oversized (OC17)</option>
+				<option data-svg-code="c16" value="oc16">Commander 2016 Oversized (OC16)</option>
+				<option data-svg-code="c15" value="oc15">Commander 2015 Oversized (OC15)</option>
+				<option data-svg-code="c14" value="oc14">Commander 2014 Oversized (OC14)</option>
+				<option data-svg-code="m15" value="ppc1">M15 Prerelease Challenge (PPC1)</option>
+				<option data-svg-code="jou" value="thp3">Journey into Nyx Hero&#39;s Path (THP3)</option>
+				<option data-svg-code="bng" value="thp2">Born of the Gods Hero&#39;s Path (THP2)</option>
+				<option data-svg-code="c13" value="oc13">Commander 2013 Oversized (OC13)</option>
+				<option data-svg-code="ths" value="thp1">Theros Hero&#39;s Path (THP1)</option>
+				<option data-svg-code="cm1" value="ocm1">Commander&#39;s Arsenal Oversized (OCM1)</option>
+				<option data-svg-code="avr" value="phel">Open the Helvault (PHEL)</option>
+				<option data-svg-code="cmd" value="ocmd">Commander 2011 Oversized (OCMD)</option>
+				<option data-svg-code="cmd" value="pcmd">Commander 2011 Launch Party (PCMD)</option>
+				<option data-svg-code="pmei" value="olgc">Legacy Championship (OLGC)</option>
+				<option data-svg-code="default" value="wc04">World Championship Decks 2004 (WC04)</option>
+				<option data-svg-code="default" value="wc03">World Championship Decks 2003 (WC03)</option>
+				<option data-svg-code="pmei" value="ovnt">Vintage Championship (OVNT)</option>
+				<option data-svg-code="default" value="wc02">World Championship Decks 2002 (WC02)</option>
+				<option data-svg-code="default" value="wc01">World Championship Decks 2001 (WC01)</option>
+				<option data-svg-code="default" value="wc00">World Championship Decks 2000 (WC00)</option>
+				<option data-svg-code="default" value="wc99">World Championship Decks 1999 (WC99)</option>
+				<option data-svg-code="default" value="wc98">World Championship Decks 1998 (WC98)</option>
+				<option data-svg-code="default" value="wc97">World Championship Decks 1997 (WC97)</option>
+				<option data-svg-code="star" value="olep">Oversized League Prizes (OLEP)</option>
+				<option data-svg-code="past" value="pmic">MicroProse Promos (PMIC)</option>
+				<option data-svg-code="star" value="pcel">Celebration Cards (PCEL)</option>
+				<option data-svg-code="default" value="ptc">Pro Tour Collector Set (PTC)</option>
+				<option data-svg-code="star" value="o90p">Oversized 90&#39;s Promos (O90P)</option>
+				<option data-svg-code="cei" value="cei">Intl. Collectors’ Edition (CEI)</option>
+				<option data-svg-code="ced" value="ced">Collectors’ Edition (CED)</option></optgroup>
+				<optgroup label="Planechase">
+				<option data-svg-code="pca" value="opca">Planechase Anthology Planes (OPCA)</option>
+				<option data-svg-code="pca" value="pca">Planechase Anthology (PCA)</option>
+				<option data-svg-code="pc2" value="opc2">Planechase 2012 Planes (OPC2)</option>
+				<option data-svg-code="pc2" value="pc2">Planechase 2012 (PC2)</option>
+				<option data-svg-code="hop" value="ohop">Planechase Planes (OHOP)</option>
+				<option data-svg-code="hop" value="hop">Planechase (HOP)</option></optgroup>
+				<optgroup label="Premium Deck">
+				<option data-svg-code="pd3" value="pd3">Premium Deck Series: Graveborn (PD3)</option>
+				<option data-svg-code="pd2" value="pd2">Premium Deck Series: Fire and Lightning (PD2)</option>
+				<option data-svg-code="h09" value="h09">Premium Deck Series: Slivers (H09)</option></optgroup>
+				<optgroup label="Promo">
+				<option data-svg-code="pr23" value="pr23">Regional Championship Qualifiers 2022 (PR23)</option>
+				<option data-svg-code="pewk" value="pewk">Eternal Weekend 2022 (PEWK)</option>
+				<option data-svg-code="slc" value="slc">Secret Lair 30th Anniversary Countdown Kit (SLC)</option>
+				<option data-svg-code="star" value="prcq">Regional Championship Qualifiers 2022 (PRCQ)</option>
+				<option data-svg-code="star" value="p30h">30th Anniversary History Promos (P30H)</option>
+				<option data-svg-code="dmu" value="pdmu">Dominaria United Promos (PDMU)</option>
+				<option data-svg-code="star" value="p30a">30th Anniversary Promos (P30A)</option>
+				<option data-svg-code="star" value="psvc">Summer Vacation Promos 2022 (PSVC)</option>
+				<option data-svg-code="star" value="sch">Store Championships 2022 (SCH)</option>
+				<option data-svg-code="star" value="plg22">Love Your LGS 2022 (PLG22)</option>
+				<option data-svg-code="clb" value="pclb">Battle for Baldur&#39;s Gate Promos (PCLB)</option>
+				<option data-svg-code="snc" value="ptsnc">Streets of New Capenna Southeast Asia Tokens (PTSNC)</option>
+				<option data-svg-code="snc" value="psnc">Streets of New Capenna Promos (PSNC)</option>
+				<option data-svg-code="ncc" value="pncc">New Capenna Commander Promos (PNCC)</option>
+				<option data-svg-code="star" value="gdy">Game Day Promos (GDY)</option>
+				<option data-svg-code="star" value="pw22">Wizards Play Network 2022 (PW22)</option>
+				<option data-svg-code="star" value="pl22">Year of the Tiger 2022 (PL22)</option>
+				<option data-svg-code="neo" value="pneo">Kamigawa: Neon Dynasty Promos (PNEO)</option>
+				<option data-svg-code="archie" value="p22">Judge Gift Cards 2022 (P22)</option>
+				<option data-svg-code="vow" value="pvow">Innistrad: Crimson Vow Promos (PVOW)</option>
+				<option data-svg-code="mid" value="pmid">Innistrad: Midnight Hunt Promos (PMID)</option>
+				<option data-svg-code="afr" value="pafr">Adventures in the Forgotten Realms Promos (PAFR)</option>
+				<option data-svg-code="star" value="plg21">Love Your LGS 2021 (PLG21)</option>
+				<option data-svg-code="mh2" value="pmh2">Modern Horizons 2 Promos (PMH2)</option>
+				<option data-svg-code="star" value="pw21">Wizards Play Network 2021 (PW21)</option>
+				<option data-svg-code="stx" value="pstx">Strixhaven: School of Mages Promos (PSTX)</option>
+				<option data-svg-code="khm" value="pkhm">Kaldheim Promos (PKHM)</option>
+				<option data-svg-code="star" value="pl21">Year of the Ox 2021 (PL21)</option>
+				<option data-svg-code="star" value="pf21">MagicFest 2021 (PF21)</option>
+				<option data-svg-code="archie" value="pj21">Judge Gift Cards 2021 (PJ21)</option>
+				<option data-svg-code="znr" value="pznr">Zendikar Rising Promos (PZNR)</option>
+				<option data-svg-code="m21" value="pm21">Core Set 2021 Promos (PM21)</option>
+				<option data-svg-code="star" value="plg20">Love Your LGS 2020 (PLG20)</option>
+				<option data-svg-code="iko" value="piko">Ikoria: Lair of Behemoths Promos (PIKO)</option>
+				<option data-svg-code="thb" value="pthb">Theros Beyond Death Promos (PTHB)</option>
+				<option data-svg-code="star" value="pf20">MagicFest 2020 (PF20)</option>
+				<option data-svg-code="archie" value="j20">Judge Gift Cards 2020 (J20)</option>
+				<option data-svg-code="eld" value="peld">Throne of Eldraine Promos (PELD)</option>
+				<option data-svg-code="war" value="ps19">San Diego Comic-Con 2019 (PS19)</option>
+				<option data-svg-code="star" value="ppp1">M20 Promo Packs (PPP1)</option>
+				<option data-svg-code="m20" value="pm20">Core Set 2020 Promos (PM20)</option>
+				<option data-svg-code="mh1" value="pmh1">Modern Horizons Promos (PMH1)</option>
+				<option data-svg-code="war" value="pwar">War of the Spark Promos (PWAR)</option>
+				<option data-svg-code="star" value="j19">Judge Gift Cards 2019 (J19)</option>
+				<option data-svg-code="rna" value="prw2">RNA Ravnica Weekend (PRW2)</option>
+				<option data-svg-code="rna" value="prna">Ravnica Allegiance Promos (PRNA)</option>
+				<option data-svg-code="star" value="pf19">MagicFest 2019 (PF19)</option>
+				<option data-svg-code="grn" value="prwk">GRN Ravnica Weekend (PRWK)</option>
+				<option data-svg-code="grn" value="pgrn">Guilds of Ravnica Promos (PGRN)</option>
+				<option data-svg-code="star" value="ps18">San Diego Comic-Con 2018 (PS18)</option>
+				<option data-svg-code="mtga" value="pana">MTG Arena Promos (PANA)</option>
+				<option data-svg-code="m19" value="pm19">Core Set 2019 Promos (PM19)</option>
+				<option data-svg-code="star" value="pss3">M19 Standard Showdown (PSS3)</option>
+				<option data-svg-code="bbd" value="pbbd">Battlebond Promos (PBBD)</option>
+				<option data-svg-code="dom" value="pdom">Dominaria Promos (PDOM)</option>
+				<option data-svg-code="star" value="plny">Lunar New Year 2018  (PLNY)</option>
+				<option data-svg-code="star" value="pnat">Nationals Promos (PNAT)</option>
+				<option data-svg-code="rix" value="prix">Rivals of Ixalan Promos (PRIX)</option>
+				<option data-svg-code="star" value="j18">Judge Gift Cards 2018 (J18)</option>
+				<option data-svg-code="star" value="f18">Friday Night Magic 2018 (F18)</option>
+				<option data-svg-code="ust" value="pust">Unstable Promos (PUST)</option>
+				<option data-svg-code="xln" value="pxtc">XLN Treasure Chest (PXTC)</option>
+				<option data-svg-code="xln" value="pxln">Ixalan Promos (PXLN)</option>
+				<option data-svg-code="star" value="pss2">XLN Standard Showdown (PSS2)</option>
+				<option data-svg-code="default" value="ps17">San Diego Comic-Con 2017 (PS17)</option>
+				<option data-svg-code="hou" value="phou">Hour of Devastation Promos (PHOU)</option>
+				<option data-svg-code="akh" value="pakh">Amonkhet Promos (PAKH)</option>
+				<option data-svg-code="aer" value="paer">Aether Revolt Promos (PAER)</option>
+				<option data-svg-code="star" value="j17">Judge Gift Cards 2017 (J17)</option>
+				<option data-svg-code="star" value="f17">Friday Night Magic 2017 (F17)</option>
+				<option data-svg-code="default" value="ps16">San Diego Comic-Con 2016 (PS16)</option>
+				<option data-svg-code="kld" value="pkld">Kaladesh Promos (PKLD)</option>
+				<option data-svg-code="emn" value="pemn">Eldritch Moon Promos (PEMN)</option>
+				<option data-svg-code="soi" value="psoi">Shadows over Innistrad Promos (PSOI)</option>
+				<option data-svg-code="ogw" value="pogw">Oath of the Gatewatch Promos (POGW)</option>
+				<option data-svg-code="star" value="f16">Friday Night Magic 2016 (F16)</option>
+				<option data-svg-code="star" value="j16">Judge Gift Cards 2016 (J16)</option>
+				<option data-svg-code="bfz" value="pbfz">Battle for Zendikar Promos (PBFZ)</option>
+				<option data-svg-code="bfz" value="pss1">BFZ Standard Series (PSS1)</option>
+				<option data-svg-code="ori" value="pori">Magic Origins Promos (PORI)</option>
+				<option data-svg-code="ori" value="ps15">San Diego Comic-Con 2015 (PS15)</option>
+				<option data-svg-code="dtk" value="ptkdf">Tarkir Dragonfury (PTKDF)</option>
+				<option data-svg-code="dtk" value="pdtk">Dragons of Tarkir Promos (PDTK)</option>
+				<option data-svg-code="frf" value="pfrf">Fate Reforged Promos (PFRF)</option>
+				<option data-svg-code="frf" value="ugin">Ugin&#39;s Fate (UGIN)</option>
+				<option data-svg-code="star" value="j15">Judge Gift Cards 2015 (J15)</option>
+				<option data-svg-code="star" value="f15">Friday Night Magic 2015 (F15)</option>
+				<option data-svg-code="ktk" value="pktk">Khans of Tarkir Promos (PKTK)</option>
+				<option data-svg-code="m15" value="pm15">Magic 2015 Promos (PM15)</option>
+				<option data-svg-code="default" value="ps14">San Diego Comic-Con 2014 (PS14)</option>
+				<option data-svg-code="cns" value="pcns">Conspiracy Promos (PCNS)</option>
+				<option data-svg-code="jou" value="pjou">Journey into Nyx Promos (PJOU)</option>
+				<option data-svg-code="bng" value="pbng">Born of the Gods Promos (PBNG)</option>
+				<option data-svg-code="m15" value="pdp15">Duels of the Planeswalkers 2015 Promos  (PDP15)</option>
+				<option data-svg-code="pidw" value="pi14">IDW Comics 2014 (PI14)</option>
+				<option data-svg-code="star" value="j14">Judge Gift Cards 2014 (J14)</option>
+				<option data-svg-code="star" value="f14">Friday Night Magic 2014 (F14)</option>
+				<option data-svg-code="ths" value="pths">Theros Promos (PTHS)</option>
+				<option data-svg-code="m14" value="pm14">Magic 2014 Promos (PM14)</option>
+				<option data-svg-code="default" value="psdc">San Diego Comic-Con 2013 (PSDC)</option>
+				<option data-svg-code="dgm" value="pdgm">Dragon&#39;s Maze Promos (PDGM)</option>
+				<option data-svg-code="star" value="wmc">World Magic Cup Qualifiers (WMC)</option>
+				<option data-svg-code="gtc" value="pgtc">Gatecrash Promos (PGTC)</option>
+				<option data-svg-code="m14" value="pdp14">Duels of the Planeswalkers 2014 Promos  (PDP14)</option>
+				<option data-svg-code="pidw" value="pi13">IDW Comics 2013 (PI13)</option>
+				<option data-svg-code="star" value="j13">Judge Gift Cards 2013 (J13)</option>
+				<option data-svg-code="star" value="f13">Friday Night Magic 2013 (F13)</option>
+				<option data-svg-code="rtr" value="prtr">Return to Ravnica Promos (PRTR)</option>
+				<option data-svg-code="m13" value="pm13">Magic 2013 Promos (PM13)</option>
+				<option data-svg-code="avr" value="pavr">Avacyn Restored Promos (PAVR)</option>
+				<option data-svg-code="dka" value="pdka">Dark Ascension Promos (PDKA)</option>
+				<option data-svg-code="pidw" value="pidw">IDW Comics 2012 (PIDW)</option>
+				<option data-svg-code="star" value="pw12">Wizards Play Network 2012 (PW12)</option>
+				<option data-svg-code="m13" value="pdp13">Duels of the Planeswalkers 2013 Promos  (PDP13)</option>
+				<option data-svg-code="star" value="f12">Friday Night Magic 2012 (F12)</option>
+				<option data-svg-code="star" value="j12">Judge Gift Cards 2012 (J12)</option>
+				<option data-svg-code="isd" value="pisd">Innistrad Promos (PISD)</option>
+				<option data-svg-code="m12" value="pm12">Magic 2012 Promos (PM12)</option>
+				<option data-svg-code="nph" value="pnph">New Phyrexia Promos (PNPH)</option>
+				<option data-svg-code="mbs" value="pmbs">Mirrodin Besieged Promos (PMBS)</option>
+				<option data-svg-code="pmps" value="pmps11">Magic Premiere Shop 2011 (PMPS11)</option>
+				<option data-svg-code="pmtg2" value="pdp12">Duels of the Planeswalkers 2012 Promos  (PDP12)</option>
+				<option data-svg-code="star" value="pw11">Wizards Play Network 2011 (PW11)</option>
+				<option data-svg-code="star" value="f11">Friday Night Magic 2011 (F11)</option>
+				<option data-svg-code="dci" value="g11">Judge Gift Cards 2011 (G11)</option>
+				<option data-svg-code="default" value="p11">Magic Player Rewards 2011 (P11)</option>
+				<option data-svg-code="som" value="psom">Scars of Mirrodin Promos (PSOM)</option>
+				<option data-svg-code="m11" value="pm11">Magic 2011 Promos (PM11)</option>
+				<option data-svg-code="roe" value="proe">Rise of the Eldrazi Promos (PROE)</option>
+				<option data-svg-code="wwk" value="pwwk">Worldwake Promos (PWWK)</option>
+				<option data-svg-code="pmtg2" value="pdp10">Duels of the Planeswalkers 2010 Promos  (PDP10)</option>
+				<option data-svg-code="dci" value="pw10">Wizards Play Network 2010 (PW10)</option>
+				<option data-svg-code="pmps" value="pmps10">Magic Premiere Shop 2010 (PMPS10)</option>
+				<option data-svg-code="dci" value="g10">Judge Gift Cards 2010 (G10)</option>
+				<option data-svg-code="default" value="p10">Magic Player Rewards 2010 (P10)</option>
+				<option data-svg-code="dci" value="f10">Friday Night Magic 2010 (F10)</option>
+				<option data-svg-code="zen" value="pzen">Zendikar Promos (PZEN)</option>
+				<option data-svg-code="dci" value="phop">Promotional Planes (PHOP)</option>
+				<option data-svg-code="m10" value="pm10">Magic 2010 Promos (PM10)</option>
+				<option data-svg-code="arb" value="parb">Alara Reborn Promos (PARB)</option>
+				<option data-svg-code="star" value="purl">URL/Convention Promos (PURL)</option>
+				<option data-svg-code="con" value="pcon">Conflux Promos (PCON)</option>
+				<option data-svg-code="pbook" value="pbook">Miscellaneous Book Promos (PBOOK)</option>
+				<option data-svg-code="dci" value="pw09">Wizards Play Network 2009 (PW09)</option>
+				<option data-svg-code="pxbox" value="pdtp">Duels of the Planeswalkers 2009 Promos  (PDTP)</option>
+				<option data-svg-code="pmps" value="pmps09">Magic Premiere Shop 2009 (PMPS09)</option>
+				<option data-svg-code="dci" value="f09">Friday Night Magic 2009 (F09)</option>
+				<option data-svg-code="default" value="p09">Magic Player Rewards 2009 (P09)</option>
+				<option data-svg-code="dci" value="g09">Judge Gift Cards 2009 (G09)</option>
+				<option data-svg-code="ala" value="pala">Shards of Alara Promos (PALA)</option>
+				<option data-svg-code="dci" value="pwpn">Wizards Play Network 2008 (PWPN)</option>
+				<option data-svg-code="eve" value="peve">Eventide Promos (PEVE)</option>
+				<option data-svg-code="shm" value="pshm">Shadowmoor Promos (PSHM)</option>
+				<option data-svg-code="default" value="p15a">15th Anniversary Cards (P15A)</option>
+				<option data-svg-code="mor" value="pmor">Morningtide Promos (PMOR)</option>
+				<option data-svg-code="pmps" value="pmps08">Magic Premiere Shop 2008 (PMPS08)</option>
+				<option data-svg-code="dci" value="pg08">Gateway 2008 (PG08)</option>
+				<option data-svg-code="dci" value="f08">Friday Night Magic 2008 (F08)</option>
+				<option data-svg-code="dci" value="g08">Judge Gift Cards 2008 (G08)</option>
+				<option data-svg-code="default" value="p08">Magic Player Rewards 2008 (P08)</option>
+				<option data-svg-code="lrw" value="plrw">Lorwyn Promos (PLRW)</option>
+				<option data-svg-code="10e" value="psum">Summer of Magic (PSUM)</option>
+				<option data-svg-code="10e" value="p10e">Tenth Edition Promos (P10E)</option>
+				<option data-svg-code="fut" value="pfut">Future Sight Promos (PFUT)</option>
+				<option data-svg-code="star" value="pgpx">Grand Prix Promos (PGPX)</option>
+				<option data-svg-code="star" value="ppro">Pro Tour Promos (PPRO)</option>
+				<option data-svg-code="plc" value="pplc">Planar Chaos Promos (PPLC)</option>
+				<option data-svg-code="star" value="pres">Resale Promos (PRES)</option>
+				<option data-svg-code="dci" value="pg07">Gateway 2007 (PG07)</option>
+				<option data-svg-code="pmps" value="pmps07">Magic Premiere Shop 2007 (PMPS07)</option>
+				<option data-svg-code="dci" value="g07">Judge Gift Cards 2007 (G07)</option>
+				<option data-svg-code="dci" value="f07">Friday Night Magic 2007 (F07)</option>
+				<option data-svg-code="default" value="p07">Magic Player Rewards 2007 (P07)</option>
+				<option data-svg-code="tsp" value="ptsp">Time Spiral Promos (PTSP)</option>
+				<option data-svg-code="csp" value="pcsp">Coldsnap Promos (PCSP)</option>
+				<option data-svg-code="dis" value="pdis">Dissension Promos (PDIS)</option>
+				<option data-svg-code="default" value="pcmp">Champs and States (PCMP)</option>
+				<option data-svg-code="gpt" value="pgpt">Guildpact Promos (PGPT)</option>
+				<option data-svg-code="parl" value="pal06">Arena League 2006 (PAL06)</option>
+				<option data-svg-code="pmtg2" value="pmps06">Magic Premiere Shop 2006 (PMPS06)</option>
+				<option data-svg-code="dci" value="pjas">Junior APAC Series (PJAS)</option>
+				<option data-svg-code="dci" value="g06">Judge Gift Cards 2006 (G06)</option>
+				<option data-svg-code="dci" value="pgtw">Gateway 2006 (PGTW)</option>
+				<option data-svg-code="dci" value="f06">Friday Night Magic 2006 (F06)</option>
+				<option data-svg-code="dci" value="p06">Magic Player Rewards 2006 (P06)</option>
+				<option data-svg-code="dci" value="p2hg">Two-Headed Giant Tournament (P2HG)</option>
+				<option data-svg-code="rav" value="prav">Ravnica: City of Guilds Promos (PRAV)</option>
+				<option data-svg-code="9ed" value="p9ed">Ninth Edition Promos (P9ED)</option>
+				<option data-svg-code="sok" value="psok">Saviors of Kamigawa Promos (PSOK)</option>
+				<option data-svg-code="bok" value="pbok">Betrayers of Kamigawa Promos (PBOK)</option>
+				<option data-svg-code="rav" value="pmps">Magic Premiere Shop 2005 (PMPS)</option>
+				<option data-svg-code="parl" value="pal05">Arena League 2005 (PAL05)</option>
+				<option data-svg-code="dci" value="pjse">Junior Series Europe (PJSE)</option>
+				<option data-svg-code="dci" value="p05">Magic Player Rewards 2005 (P05)</option>
+				<option data-svg-code="dci" value="f05">Friday Night Magic 2005 (F05)</option>
+				<option data-svg-code="dci" value="g05">Judge Gift Cards 2005 (G05)</option>
+				<option data-svg-code="unh" value="punh">Unhinged Promos (PUNH)</option>
+				<option data-svg-code="chk" value="pchk">Champions of Kamigawa Promos (PCHK)</option>
+				<option data-svg-code="5dn" value="p5dn">Fifth Dawn Promos (P5DN)</option>
+				<option data-svg-code="mrd" value="pmrd">Mirrodin Promos (PMRD)</option>
+				<option data-svg-code="dst" value="pdst">Darksteel Promos (PDST)</option>
+				<option data-svg-code="parl" value="pal04">Arena League 2004 (PAL04)</option>
+				<option data-svg-code="dci" value="g04">Judge Gift Cards 2004 (G04)</option>
+				<option data-svg-code="dci" value="f04">Friday Night Magic 2004 (F04)</option>
+				<option data-svg-code="dci" value="p04">Magic Player Rewards 2004 (P04)</option>
+				<option data-svg-code="8ed" value="p8ed">Eighth Edition Promos (P8ED)</option>
+				<option data-svg-code="scg" value="pscg">Scourge Promos (PSCG)</option>
+				<option data-svg-code="lgn" value="plgn">Legions Promos (PLGN)</option>
+				<option data-svg-code="ons" value="pons">Onslaught Promos (PONS)</option>
+				<option data-svg-code="dci" value="pjjt">Japan Junior Tournament (PJJT)</option>
+				<option data-svg-code="parl" value="pal03">Arena League 2003 (PAL03)</option>
+				<option data-svg-code="dci" value="f03">Friday Night Magic 2003 (F03)</option>
+				<option data-svg-code="dci" value="g03">Judge Gift Cards 2003 (G03)</option>
+				<option data-svg-code="dci" value="p03">Magic Player Rewards 2003 (P03)</option>
+				<option data-svg-code="default" value="phj">Hobby Japan Promos (PHJ)</option>
+				<option data-svg-code="mtgo" value="prm">Magic Online Promos (PRM)</option>
+				<option data-svg-code="jud" value="pjud">Judgment Promos (PJUD)</option>
+				<option data-svg-code="tor" value="ptor">Torment Promos (PTOR)</option>
+				<option data-svg-code="parl" value="pal02">Arena League 2002 (PAL02)</option>
+				<option data-svg-code="dci" value="f02">Friday Night Magic 2002 (F02)</option>
+				<option data-svg-code="dci" value="g02">Judge Gift Cards 2002 (G02)</option>
+				<option data-svg-code="dci" value="pr2">Magic Player Rewards 2002 (PR2)</option>
+				<option data-svg-code="ody" value="pody">Odyssey Promos (PODY)</option>
+				<option data-svg-code="apc" value="papc">Apocalypse Promos (PAPC)</option>
+				<option data-svg-code="pls" value="ppls">Planeshift Promos (PPLS)</option>
+				<option data-svg-code="parl2" value="pal01">Arena League 2001 (PAL01)</option>
+				<option data-svg-code="dci" value="f01">Friday Night Magic 2001 (F01)</option>
+				<option data-svg-code="dci" value="g01">Judge Gift Cards 2001 (G01)</option>
+				<option data-svg-code="dci" value="mpr">Magic Player Rewards 2001 (MPR)</option>
+				<option data-svg-code="inv" value="pinv">Invasion Promos (PINV)</option>
+				<option data-svg-code="pcy" value="ppcy">Prophecy Promos (PPCY)</option>
+				<option data-svg-code="nem" value="pnem">Nemesis Promos (PNEM)</option>
+				<option data-svg-code="peuro" value="pelp">European Land Program (PELP)</option>
+				<option data-svg-code="parl2" value="pal00">Arena League 2000 (PAL00)</option>
+				<option data-svg-code="dci" value="g00">Judge Gift Cards 2000 (G00)</option>
+				<option data-svg-code="default" value="fnm">Friday Night Magic 2000 (FNM)</option>
+				<option data-svg-code="dci" value="psus">Junior Super Series (PSUS)</option>
+				<option data-svg-code="mmq" value="pmmq">Mercadian Masques Promos (PMMQ)</option>
+				<option data-svg-code="default" value="pwos">Wizards of the Coast Online Store (PWOS)</option>
+				<option data-svg-code="default" value="pwor">World Championship Promos (PWOR)</option>
+				<option data-svg-code="pgru" value="pgru">Guru (PGRU)</option>
+				<option data-svg-code="ptk" value="pptk">Portal: Three Kingdoms Promos (PPTK)</option>
+				<option data-svg-code="uds" value="puds">Urza&#39;s Destiny Promos (PUDS)</option>
+				<option data-svg-code="ulg" value="pulg">Urza&#39;s Legacy Promos (PULG)</option>
+				<option data-svg-code="usg" value="pal99">Arena League 1999 (PAL99)</option>
+				<option data-svg-code="default" value="g99">Judge Gift Cards 1999 (G99)</option>
+				<option data-svg-code="usg" value="pusg">Urza&#39;s Saga Promos (PUSG)</option>
+				<option data-svg-code="papac" value="palp">Asia Pacific Land Program (PALP)</option>
+				<option data-svg-code="exo" value="pexo">Exodus Promos (PEXO)</option>
+				<option data-svg-code="sth" value="psth">Stronghold Promos (PSTH)</option>
+				<option data-svg-code="default" value="jgp">Judge Gift Cards 1998 (JGP)</option>
+				<option data-svg-code="tmp" value="ptmp">Tempest Promos (PTMP)</option>
+				<option data-svg-code="default" value="pred">Redemption Program (PRED)</option>
+				<option data-svg-code="parl" value="parl">Arena League 1996 (PARL)</option>
+				<option data-svg-code="pmei" value="pmei">Media Inserts (PMEI)</option>
+				<option data-svg-code="default" value="plgm">DCI Legend Membership (PLGM)</option>
+				<option data-svg-code="pbook" value="phpr">HarperPrism Book Promos (PHPR)</option>
+				<option data-svg-code="pdrc" value="pdrc">Dragon Con (PDRC)</option></optgroup>
+				<optgroup label="Spellbook">
+				<option data-svg-code="ss3" value="ss3">Signature Spellbook: Chandra (SS3)</option>
+				<option data-svg-code="ss2" value="ss2">Signature Spellbook: Gideon (SS2)</option>
+				<option data-svg-code="ss1" value="ss1">Signature Spellbook: Jace (SS1)</option></optgroup>
+				<optgroup label="Starter">
+				<option data-svg-code="mtga" value="anb">Arena Beginner Set (ANB)</option>
+				<option data-svg-code="jmp" value="ajmp">Jumpstart Arena Exclusives (AJMP)</option>
+				<option data-svg-code="mtga" value="ana">Arena New Player Experience (ANA)</option>
+				<option data-svg-code="mtga" value="oana">Arena New Player Experience Cards (OANA)</option>
+				<option data-svg-code="w17" value="w17">Welcome Deck 2017 (W17)</option>
+				<option data-svg-code="w16" value="w16">Welcome Deck 2016 (W16)</option>
+				<option data-svg-code="star" value="cp3">Magic Origins Clash Pack (CP3)</option>
+				<option data-svg-code="star" value="cp2">Fate Reforged Clash Pack (CP2)</option>
+				<option data-svg-code="star" value="cp1">Magic 2015 Clash Pack (CP1)</option>
+				<option data-svg-code="s00" value="s00">Starter 2000 (S00)</option>
+				<option data-svg-code="ptk" value="ptk">Portal Three Kingdoms (PTK)</option>
+				<option data-svg-code="s99" value="s99">Starter 1999 (S99)</option>
+				<option data-svg-code="p02" value="p02">Portal Second Age (P02)</option>
+				<option data-svg-code="por" value="por">Portal (POR)</option>
+				<option data-svg-code="x2ps" value="itp">Introductory Two-Player Set (ITP)</option></optgroup>
+				<optgroup label="Token">
+				<option data-svg-code="t30a" value="t30a">30th Anniversary Tokens (T30A)</option>
+				<option data-svg-code="tbot" value="tbot">Transformers Tokens (TBOT)</option>
+				<option data-svg-code="tgn3" value="tgn3">Game Night: Free-for-All Tokens (TGN3)</option>
+				<option data-svg-code="unf" value="sunf">Unfinity Sticker Sheets (SUNF)</option>
+				<option data-svg-code="40k" value="t40k">Warhammer 40,000 Tokens (T40K)</option>
+				<option data-svg-code="unf" value="tunf">Unfinity Tokens (TUNF)</option>
+				<option data-svg-code="dmu" value="tdmu">Dominaria United Tokens (TDMU)</option>
+				<option data-svg-code="dmc" value="tdmc">Dominaria United Commander Tokens (TDMC)</option>
+				<option data-svg-code="2x2" value="t2x2">Double Masters 2022 Tokens (T2X2)</option>
+				<option data-svg-code="clb" value="tclb">Battle for Baldur&#39;s Gate Tokens (TCLB)</option>
+				<option data-svg-code="snc" value="tsnc">Streets of New Capenna Tokens (TSNC)</option>
+				<option data-svg-code="ncc" value="tncc">New Capenna Commander Tokens (TNCC)</option>
+				<option data-svg-code="nec" value="tnec">Neon Dynasty Commander Tokens (TNEC)</option>
+				<option data-svg-code="neo" value="tneo">Kamigawa: Neon Dynasty Tokens (TNEO)</option>
+				<option data-svg-code="vow" value="tvow">Innistrad: Crimson Vow Tokens (TVOW)</option>
+				<option data-svg-code="voc" value="tvoc">Crimson Vow Commander Tokens (TVOC)</option>
+				<option data-svg-code="vow" value="svow">Innistrad: Crimson Vow Substitute Cards (SVOW)</option>
+				<option data-svg-code="mid" value="smid">Innistrad: Midnight Hunt Substitute Cards (SMID)</option>
+				<option data-svg-code="mic" value="tmic">Midnight Hunt Commander Tokens (TMIC)</option>
+				<option data-svg-code="mid" value="tmid">Innistrad: Midnight Hunt Tokens (TMID)</option>
+				<option data-svg-code="afr" value="tafr">Adventures in the Forgotten Realms Tokens (TAFR)</option>
+				<option data-svg-code="afc" value="tafc">Forgotten Realms Commander Tokens (TAFC)</option>
+				<option data-svg-code="mh2" value="tmh2">Modern Horizons 2 Tokens (TMH2)</option>
+				<option data-svg-code="stx" value="tstx">Strixhaven: School of Mages Tokens (TSTX)</option>
+				<option data-svg-code="c21" value="tc21">Commander 2021 Tokens (TC21)</option>
+				<option data-svg-code="stx" value="sstx">Strixhaven: School of Mages Substitute Cards (SSTX)</option>
+				<option data-svg-code="tsr" value="ttsr">Time Spiral Remastered Tokens (TTSR)</option>
+				<option data-svg-code="khm" value="skhm">Kaldheim Substitute Cards (SKHM)</option>
+				<option data-svg-code="khc" value="tkhc">Kaldheim Commander Tokens (TKHC)</option>
+				<option data-svg-code="khm" value="tkhm">Kaldheim Tokens (TKHM)</option>
+				<option data-svg-code="cmr" value="tcmr">Commander Legends Tokens (TCMR)</option>
+				<option data-svg-code="znc" value="tznc">Zendikar Rising Commander Tokens (TZNC)</option>
+				<option data-svg-code="znr" value="tznr">Zendikar Rising Tokens (TZNR)</option>
+				<option data-svg-code="znr" value="sznr">Zendikar Rising Substitute Cards (SZNR)</option>
+				<option data-svg-code="2xm" value="t2xm">Double Masters Tokens (T2XM)</option>
+				<option data-svg-code="m21" value="tm21">Core Set 2021 Tokens (TM21)</option>
+				<option data-svg-code="iko" value="tiko">Ikoria: Lair of Behemoths Tokens (TIKO)</option>
+				<option data-svg-code="c20" value="tc20">Commander 2020 Tokens (TC20)</option>
+				<option data-svg-code="und" value="tund">Unsanctioned Tokens (TUND)</option>
+				<option data-svg-code="thb" value="tthb">Theros Beyond Death Tokens (TTHB)</option>
+				<option data-svg-code="gn2" value="tgn2">Game Night 2019 Tokens (TGN2)</option>
+				<option data-svg-code="eld" value="teld">Throne of Eldraine Tokens (TELD)</option>
+				<option data-svg-code="c19" value="tc19">Commander 2019 Tokens (TC19)</option>
+				<option data-svg-code="m20" value="tm20">Core Set 2020 Tokens (TM20)</option>
+				<option data-svg-code="mh1" value="tmh1">Modern Horizons Tokens (TMH1)</option>
+				<option data-svg-code="war" value="twar">War of the Spark Tokens (TWAR)</option>
+				<option data-svg-code="rna" value="tgk2">RNA Guild Kit Tokens (TGK2)</option>
+				<option data-svg-code="rna" value="trna">Ravnica Allegiance Tokens (TRNA)</option>
+				<option data-svg-code="uma" value="tuma">Ultimate Masters Tokens (TUMA)</option>
+				<option data-svg-code="grn" value="tgk1">GRN Guild Kit Tokens (TGK1)</option>
+				<option data-svg-code="grn" value="tgrn">Guilds of Ravnica Tokens (TGRN)</option>
+				<option data-svg-code="med" value="tmed">Mythic Edition Tokens (TMED)</option>
+				<option data-svg-code="c18" value="tc18">Commander 2018 Tokens (TC18)</option>
+				<option data-svg-code="m19" value="tm19">Core Set 2019 Tokens (TM19)</option>
+				<option data-svg-code="bbd" value="tbbd">Battlebond Tokens (TBBD)</option>
+				<option data-svg-code="cm2" value="tcm2">Commander Anthology Volume II Tokens (TCM2)</option>
+				<option data-svg-code="dom" value="tdom">Dominaria Tokens (TDOM)</option>
+				<option data-svg-code="ddu" value="tddu">Duel Decks: Elves vs. Inventors Tokens (TDDU)</option>
+				<option data-svg-code="a25" value="ta25">Masters 25 Tokens (TA25)</option>
+				<option data-svg-code="rix" value="trix">Rivals of Ixalan Tokens (TRIX)</option>
+				<option data-svg-code="ust" value="tust">Unstable Tokens (TUST)</option>
+				<option data-svg-code="ima" value="tima">Iconic Masters Tokens (TIMA)</option>
+				<option data-svg-code="ddt" value="tddt">Duel Decks: Merfolk vs. Goblins Tokens (TDDT)</option>
+				<option data-svg-code="xln" value="txln">Ixalan Tokens (TXLN)</option>
+				<option data-svg-code="e01" value="te01">Archenemy: Nicol Bolas Tokens (TE01)</option>
+				<option data-svg-code="c17" value="tc17">Commander 2017 Tokens (TC17)</option>
+				<option data-svg-code="hou" value="thou">Hour of Devastation Tokens (THOU)</option>
+				<option data-svg-code="cma" value="tcma">Commander Anthology Tokens (TCMA)</option>
+				<option data-svg-code="akh" value="takh">Amonkhet Tokens (TAKH)</option>
+				<option data-svg-code="dds" value="tdds">Duel Decks: Mind vs. Might Tokens (TDDS)</option>
+				<option data-svg-code="mm3" value="tmm3">Modern Masters 2017 Tokens (TMM3)</option>
+				<option data-svg-code="aer" value="taer">Aether Revolt Tokens (TAER)</option>
+				<option data-svg-code="default" value="l17">League Tokens 2017 (L17)</option>
+				<option data-svg-code="pca" value="tpca">Planechase Anthology Tokens (TPCA)</option>
+				<option data-svg-code="c16" value="tc16">Commander 2016 Tokens (TC16)</option>
+				<option data-svg-code="kld" value="tkld">Kaladesh Tokens (TKLD)</option>
+				<option data-svg-code="cn2" value="tcn2">Conspiracy: Take the Crown Tokens (TCN2)</option>
+				<option data-svg-code="emn" value="temn">Eldritch Moon Tokens (TEMN)</option>
+				<option data-svg-code="ema" value="tema">Eternal Masters Tokens (TEMA)</option>
+				<option data-svg-code="soi" value="tsoi">Shadows over Innistrad Tokens (TSOI)</option>
+				<option data-svg-code="ogw" value="togw">Oath of the Gatewatch Tokens (TOGW)</option>
+				<option data-svg-code="default" value="l16">League Tokens 2016 (L16)</option>
+				<option data-svg-code="c15" value="tc15">Commander 2015 Tokens (TC15)</option>
+				<option data-svg-code="bfz" value="tbfz">Battle for Zendikar Tokens (TBFZ)</option>
+				<option data-svg-code="ori" value="tori">Magic Origins Tokens (TORI)</option>
+				<option data-svg-code="mm2" value="tmm2">Modern Masters 2015 Tokens (TMM2)</option>
+				<option data-svg-code="dtk" value="tdtk">Dragons of Tarkir Tokens (TDTK)</option>
+				<option data-svg-code="frf" value="tfrf">Fate Reforged Tokens (TFRF)</option>
+				<option data-svg-code="default" value="l15">League Tokens 2015 (L15)</option>
+				<option data-svg-code="dd2" value="tjvc">Duel Decks Anthology: Jace vs. Chandra Tokens (TJVC)</option>
+				<option data-svg-code="ddc" value="tdvd">Duel Decks Anthology: Divine vs. Demonic Tokens (TDVD)</option>
+				<option data-svg-code="ddd" value="tgvl">Duel Decks Anthology: Garruk vs. Liliana Tokens (TGVL)</option>
+				<option data-svg-code="dd1" value="tevg">Duel Decks Anthology: Elves vs. Goblins Tokens (TEVG)</option>
+				<option data-svg-code="c14" value="tc14">Commander 2014 Tokens (TC14)</option>
+				<option data-svg-code="ktk" value="tktk">Khans of Tarkir Tokens (TKTK)</option>
+				<option data-svg-code="m15" value="tm15">Magic 2015 Tokens (TM15)</option>
+				<option data-svg-code="cns" value="tcns">Conspiracy Tokens (TCNS)</option>
+				<option data-svg-code="md1" value="tmd1">Modern Event Deck 2014 Tokens (TMD1)</option>
+				<option data-svg-code="jou" value="tdag">Defeat a God (TDAG)</option>
+				<option data-svg-code="jou" value="tjou">Journey into Nyx Tokens (TJOU)</option>
+				<option data-svg-code="ddm" value="tddm">Duel Decks: Jace vs. Vraska Tokens (TDDM)</option>
+				<option data-svg-code="bng" value="tbth">Battle the Horde (TBTH)</option>
+				<option data-svg-code="bng" value="tbng">Born of the Gods Tokens (TBNG)</option>
+				<option data-svg-code="default" value="l14">League Tokens 2014 (L14)</option>
+				<option data-svg-code="ths" value="tfth">Face the Hydra (TFTH)</option>
+				<option data-svg-code="ths" value="tths">Theros Tokens (TTHS)</option>
+				<option data-svg-code="ddl" value="tddl">Duel Decks: Heroes vs. Monsters Tokens (TDDL)</option>
+				<option data-svg-code="m14" value="tm14">Magic 2014 Tokens (TM14)</option>
+				<option data-svg-code="mma" value="tmma">Modern Masters Tokens (TMMA)</option>
+				<option data-svg-code="dgm" value="tdgm">Dragon&#39;s Maze Tokens (TDGM)</option>
+				<option data-svg-code="ddk" value="tddk">Duel Decks: Sorin vs. Tibalt Tokens (TDDK)</option>
+				<option data-svg-code="gtc" value="tgtc">Gatecrash Tokens (TGTC)</option>
+				<option data-svg-code="default" value="l13">League Tokens 2013 (L13)</option>
+				<option data-svg-code="rtr" value="trtr">Return to Ravnica Tokens (TRTR)</option>
+				<option data-svg-code="ddj" value="tddj">Duel Decks: Izzet vs. Golgari Tokens (TDDJ)</option>
+				<option data-svg-code="m13" value="tm13">Magic 2013 Tokens (TM13)</option>
+				<option data-svg-code="avr" value="tavr">Avacyn Restored Tokens (TAVR)</option>
+				<option data-svg-code="ddi" value="tddi">Duel Decks: Venser vs. Koth Tokens (TDDI)</option>
+				<option data-svg-code="dka" value="tdka">Dark Ascension Tokens (TDKA)</option>
+				<option data-svg-code="default" value="l12">League Tokens 2012 (L12)</option>
+				<option data-svg-code="isd" value="tisd">Innistrad Tokens (TISD)</option>
+				<option data-svg-code="ddh" value="tddh">Duel Decks: Ajani vs. Nicol Bolas Tokens (TDDH)</option>
+				<option data-svg-code="m12" value="tm12">Magic 2012 Tokens (TM12)</option>
+				<option data-svg-code="nph" value="tnph">New Phyrexia Tokens (TNPH)</option>
+				<option data-svg-code="ddg" value="tddg">Duel Decks: Knights vs. Dragons Tokens (TDDG)</option>
+				<option data-svg-code="mbs" value="tmbs">Mirrodin Besieged Tokens (TMBS)</option>
+				<option data-svg-code="som" value="tsom">Scars of Mirrodin Tokens (TSOM)</option>
+				<option data-svg-code="ddf" value="tddf">Duel Decks: Elspeth vs. Tezzeret Tokens (TDDF)</option>
+				<option data-svg-code="m11" value="tm11">Magic 2011 Tokens (TM11)</option>
+				<option data-svg-code="roe" value="troe">Rise of the Eldrazi Tokens (TROE)</option>
+				<option data-svg-code="dde" value="tdde">Duel Decks: Phyrexia vs. the Coalition Tokens (TDDE)</option>
+				<option data-svg-code="wwk" value="twwk">Worldwake Tokens (TWWK)</option>
+				<option data-svg-code="ddd" value="tddd">Duel Decks: Garruk vs. Liliana Tokens (TDDD)</option>
+				<option data-svg-code="zen" value="tzen">Zendikar Tokens (TZEN)</option>
+				<option data-svg-code="m10" value="tm10">Magic 2010 Tokens (TM10)</option>
+				<option data-svg-code="arb" value="tarb">Alara Reborn Tokens (TARB)</option>
+				<option data-svg-code="ddc" value="tddc">Duel Decks: Divine vs. Demonic Tokens (TDDC)</option>
+				<option data-svg-code="con" value="tcon">Conflux Tokens (TCON)</option>
+				<option data-svg-code="dd2" value="tdd2">Duel Decks: Jace vs. Chandra Tokens (TDD2)</option>
+				<option data-svg-code="ala" value="tala">Shards of Alara Tokens (TALA)</option>
+				<option data-svg-code="eve" value="teve">Eventide Tokens (TEVE)</option>
+				<option data-svg-code="shm" value="tshm">Shadowmoor Tokens (TSHM)</option>
+				<option data-svg-code="mor" value="tmor">Morningtide Tokens (TMOR)</option>
+				<option data-svg-code="dd1" value="tdd1">Duel Decks: Elves vs. Goblins Tokens (TDD1)</option>
+				<option data-svg-code="lrw" value="tlrw">Lorwyn Tokens (TLRW)</option>
+				<option data-svg-code="10e" value="t10e">Tenth Edition Tokens (T10E)</option>
+				<option data-svg-code="default" value="tugl">Unglued Tokens (TUGL)</option></optgroup>
+				<optgroup label="Treasure Chest">
+				<option data-svg-code="pz2" value="pz2">Treasure Chest (PZ2)</option>
+				<option data-svg-code="pz1" value="pz1">Legendary Cube Prize Pack (PZ1)</option></optgroup>
+				<optgroup label="Vanguard">
+				<option data-svg-code="mtgo" value="pmoa">Magic Online Avatars (PMOA)</option>
+				<option data-svg-code="van" value="pvan">Vanguard Series (PVAN)</option></optgroup>
+			</select>
+			  
+			<p></p>
+			<input id="input" class="input" type="submit" value="Submit" style="height:50px; width:100px">
+		</form>
+
+		<div class="outer2" id="outer2">
+			<form id="form2" class="form2" method="post" autocomplete="off">
+				{% csrf_token %}
+
+				<input id="single" type="text" placeholder="Specific Card Name">
+				<p></p>
+				<input id="input2" type="submit" value="Submit" style="height:50px; width:100px">
+			</form>
+		</div>
+	</div>
+	<!-- extend search form on hover -->
+	<script>
+		$('.outer').hover(
+       function(){ $(this).addClass('outer3') },
+       function(){ $(this).removeClass('outer') },
+		)
+
+		$('.outer').hover(
+		function(){ $('.input').addClass('input3') },
+		function(){ $('.input').removeClass('input') }
+		)
+
+	</script>
+
+	</main>
+	</body>
+	<footer class="footer">
+		<div id="dis">
+		<span class="foot">Cardboard in Space Code/Design &copy; 2023 Frank Alarcon.</span>
+		<br>	
+		Cardboard in Space is unofficial Fan Content permitted under the Fan Content Policy.
+		<br> 
+		Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. 
+		©Wizards of the Coast LLC.
+		</div>
+		<div id="counter">
+            Page Views: <span id="visits"></span>
+        </div>
+		<div id="links">
+			<ul>
+				<li><a data-page="home" href="{% url 'test">Home</a></li>
+				<li><a data-page="about" href="{% url 'about">About</a></li>
+				<li><a data-page="contact" href="{% url 'contact">Contact</a></li>
+			</ul>
+		</div>
+	</footer>
+</html>

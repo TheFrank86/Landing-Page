@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./style-modal.css" />
+        <title>Ship Click</title>
+    </head>
+    <body>
+        <script src="./three.min.js"></script>
+        <script src="./GLTFLoader.js"></script>
+        <script src="./yuka.js"></script>
+        <script src="./scripts2.js" type="module"></script>
+        <script src="./script-modal.js" type="module"></script>
+
+        <div id="background-image"></div>
+        
+        <!-- data-modal-target = "#(the named ID of the desired target div)"-->
+        <button data-modal-target="#modal" id="button1">Open Modal Test 1</button>
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <div class="title">Example Title 1</div>
+                <button data-close-button class="close-button">&times;</button>
+            </div>
+            <div class="modal-body">
+                This is all the content to be display when opened.
+                <br>
+                This is all the content to be display when opened.
+                <br>
+                This is all the content to be display when opened.
+                <br>
+                This is all the content to be display when opened.
+            </div>
+        </div>
+        
+        <button data-modal-target="#modal2" id="button2">Open Modal Test 2</button>
+        <div class="modal" id="modal2">
+            <div class="modal-header">
+                <div class="title">Example Title 2</div>
+                <button data-close-button class="close-button">&times;</button>
+            </div>
+            <div class="modal-body">
+                * This is all the content to be display when opened 2.
+                <br>
+                * This is all the content to be display when opened 2.
+                <br>
+                * This is all the content to be display when opened 2.
+                <br>
+                * This is all the content to be display when opened 2.
+            </div>
+        </div> 
+
+        <div id="overlay"></div>
+
+    </body>
+</html>

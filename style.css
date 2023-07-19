@@ -1,0 +1,41 @@
+*::after, *::before {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  overflow: hidden;
+  /* background: url("stars.jpg"); */
+}
+
+.scene,
+canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#background-image {
+  position: fixed;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  /* background-image: url("stars.jpg"); ******************************************************************************************   */ 
+  content: url("stars.jpg");
+  align-content: center;
+  width: 110%;
+  height: 110%;
+  top: -5%;
+  left: -5%; 
+ 
+  transform: rotate(0deg);
+  z-index: -999;
+}
