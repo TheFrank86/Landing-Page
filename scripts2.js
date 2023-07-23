@@ -1,4 +1,4 @@
-let model;
+let model, mesh1;
 
 const renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -49,6 +49,37 @@ scene.add( helper );
 // vehicleMesh.matrixAutoUpdate = false;
 // scene.add(vehicleMesh);
 
+// texture loader
+const textureLoader = new THREE.TextureLoader();
+
+// asteroid texture loading
+const rock = textureLoader.load("./static/asteroid2.png");
+rock.rotation = 0.3;
+
+// asteroid 1 initialization 
+const rockGeometry = new THREE.PlaneGeometry(8, 8);
+
+const rockMaterial = new THREE.MeshStandardMaterial({
+    //size: 2.0,
+    //color: 0xddc0ff,
+    color: 0xffffff,
+    map: rock,
+    //wireframe: true,
+    transparent: true,
+});
+
+mesh1 = new THREE.Mesh(rockGeometry, rockMaterial);
+scene.add(mesh1);
+
+/* var center = new THREE.Vector3();
+mesh1.geometry.computeBoundingBox();
+mesh1.geometry.boundingBox.getCenter(center);
+mesh1.geometry.center();
+mesh1.position.copy(center); */
+
+mesh1.position.set(-7,7,0);
+
+// Yuka AI vehicle initialization 
 const vehicle = new YUKA.Vehicle();
 
 vehicle.scale.set(0.60, 0.60, 0.60);
@@ -150,13 +181,19 @@ let laserClick = false;
 // test with 'click' and mousedown
 window.addEventListener('mousedown', function() {
     
-    raycaster.setFromCamera(mousePosition, camera);
-    const intersects = raycaster.intersectObjects(scene.children);
-    for(let i = 0; i < intersects.length; i++) {
-        if(intersects[i].object.name === 'plane') 
-            target.position.set(intersects[i].point.x, intersects[i].point.y, intersects[i].point.z);
-    }
-    laserClick = true;
+    //if (overlay.style.opacity = "0") {
+        raycaster.setFromCamera(mousePosition, camera);
+        const intersects = raycaster.intersectObjects(scene.children);
+        for(let i = 0; i < intersects.length; i++) {
+            if(intersects[i].object.name === 'plane') 
+                target.position.set(intersects[i].point.x, intersects[i].point.y, intersects[i].point.z);
+        }
+        laserClick = true;
+
+        // Modal test and position **************************************************************************************************************
+        let test = document.getElementById('button1');
+        console.log( "(" + test.offsetLeft + ", " + test.offsetTop + ")");
+    //}
 });
 
 // setInterval(function(){
@@ -216,10 +253,11 @@ function animate(t) {
     ship.rotation.y += Math.sin(t / 400) * (toleranceY);
     ship.position.z += Math.sin(t / 400) * -(toleranceZ);
     
-
-    //ship.rotation.x += Math.sin(t / 400) * 0.0005;
-    //ship.rotation.y += Math.sin(t / 400) * 0.0005;
-    //ship.position.z += Math.sin(t / 400) * -0.0002;
+    // asteroid 1 default animation
+    mesh1.rotation.z += Math.sin(t / 1200) * 0.0003;
+    mesh1.position.z += Math.sin(t / 800) * 0.0008;
+    mesh1.position.x += Math.sin(t / 1600) * 0.001;
+    mesh1.position.y += Math.sin(t / 1400) * 0.001;
     
     //let angle = Math.atan2(mouseY - ship.position.y, mouseX - ship.position.x);
     //ship.rotation.z = -angle - Math.PI -1.5;
@@ -328,6 +366,23 @@ function animate(t) {
         scene.add(bullet);
         canShoot = 10;
         laserClick = false;
+    }
+
+    const test1 = document.getElementById('button1');
+    //const test2 = document.getElementById('button2');
+        
+    //console.log( "(" + test1.offsetLeft + ", " + test1.offsetTop + ")");
+
+    // this goes in Animate, as laser gets in proximity of button **********************************************************************
+    for(let index = 0; index < bullets.length; index += 1){
+        console.log(bullets[index].position.y);
+
+        // at planegeometry (8, 8), mesh.x -3.5, +2  mesh.y -1.5, +3.5
+        if (bullets[index].position.x > (mesh1.position.x - 3.5) && bullets[index].position.x < (mesh1.position.x + 2)){
+            if (bullets[index].position.y > (mesh1.position.y - 1.5) && bullets[index].position.y < (mesh1.position.y + 3.5)){
+                 openModal(modal1);
+            }    
+        } 
     }
 
     // timer for laser intervals
