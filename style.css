@@ -36,6 +36,14 @@ canvas {
   top: -5%;
   left: -5%; 
  
+  will-change: transform;
+  backface-visibility: hidden;
   transform: rotate(0deg);
   z-index: -999;
+  animation: rotateAnimation 15s linear infinite;
+}
+@keyframes rotateAnimation {
+	0% {transform: rotate(-0.5deg);}
+	50% {transform: rotate(0.5deg);}
+  100% {transform: rotate(-0.5deg);}
 }

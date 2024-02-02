@@ -221,12 +221,6 @@ function animate(t) {
 
     const delta = time.update().getDelta();
 
-    //rotate background stars.jpg ****************************************************************************************
-    let backgroundImage = document.getElementById("background-image");
-    let tilt = Math.sin(t /6000) * 1.5;
-
-    backgroundImage.style.transform = `rotate(${tilt}deg)`;
-
     // remeber the plane was shifted ln 87 (planeMesh.rotation.x = -0.5 * Math.PI)
     // Y position animation * speed , * tolerance
     //vehicle.position.y = Math.sin(t / 700) * -0.04;

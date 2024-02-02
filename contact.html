@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<title>Get in Contact</title>
+
+		<!-- main interactive js file -->
+		<script type="module" src="./js/main.js" defer></script>
+		
+		<!-- style.css file -->
+		<link rel="stylesheet" type="text/css"  media="screen" href="./static/css/style.css"/>
+
+		<!-- favicon image -->
+		<link rel="shortcut icon" type="image/ico" href="./static/favicon.ico"/>
+
+		<!-- Common device meta tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv='cache-control' content='no-cache'>
+		<meta http-equiv='expires' content='0'>
+		<meta http-equiv='pragma' content='no-cache'>
+		
+	</head>
+	<body class="contactBody" id="body">
+		
+		<!-- *** load the header.js as Template Literal *** -->
+		<span class="boxShadow"><header class="nav"></header></span>
+		<script type="module" src="./js/html-js/header.js"></script>
+
+		<!-- css animated background -->
+		<div id="background-image"></div>
+
+		<!-- Three.js background canvas -->
+		<canvas id="bg"></canvas>
+
+		<main>
+		
+		<!--  <div id="background-image"> </div> -->
+
+		<!-- flash text on starToggle fragGreen shader -->
+		<div class="flash"> <span class="corrupt">&#9762;</span> CORRUPTED <span class="corrupt">&#9762;</span> </div>
+		
+		<!-- Contact/Email form -->
+		<div class="container">
+			<form action="https://formspree.io/f/meqdzwgv" method="POST" class="contactForm">
+				
+				<h1 class="contacth1">Contact Me</h1>
+
+				<input type="text" name="Name" placeholder="Your Name/Company" class="contactOption" required>
+				
+				<input type="email" name"Email" id="email" placeholder="Your Email" class="contactOption" required>
+				
+				<textarea name="Message" placeholder="Your Message" class="contactOption" required></textarea>
+				
+				<input type="submit" value="Send" class="contactButton">
+			</form>
+		</div>
+	</main>
+	</body>
+	 
+		<!-- star shader toggle / music toggle -->
+		<div class="toggle">
+			<img id="music" src="./static/star/mNoteRed.png" alt="white and Black Music Note">
+			<img id="sToggle" src="./static/star/sunOrBlue.png" alt="Orange and Blue Star">
+		</div>
+
+		<!-- *** load the footer.js as Template Literal *** -->
+		<div id="footer"></div>
+		<script type="module" src="./js/html-js/footer.js"></script>
+
+</html>
